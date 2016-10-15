@@ -1,5 +1,5 @@
 (fp_lib_table
   (lib (name agg)(type KiCad)(uri "$(KIPRJMOD)\\..\\agg-kicad\\agg.pretty")(options "")(descr ""))
   (lib (name unchecked)(type KiCad)(uri "$(KIPRJMOD)\\..\\agg-kicad\\agg.pretty\\unchecked.pretty")(options "")(descr ""))
-  (lib (name yule)(type KiCad)(uri "$(KIPRJMOD)/footprints")(options "")(descr ""))
+  (lib (name yule)(type KiCad)(uri "$(KIPRJMOD)\\..\\pcb\\footprints")(options "")(descr ""))
 )

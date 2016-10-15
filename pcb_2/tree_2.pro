@@ -1,4 +1,4 @@
-update=15/10/2016 14:17:31
+update=15/10/2016 14:21:06
 version=1
 last_client=kicad
 [pcbnew]
@@ -27,20 +27,20 @@ NetIExt=net
 version=1
 [eeschema]
 version=1
-LibDir=../agg-kicad
+LibDir=../pcb;../agg-kicad
 [eeschema/libraries]
-LibName1=libs/swd_tc
+LibName1=libs/c
 LibName2=libs/conn
-LibName3=libs/microusb
-LibName4=libs/switch
-LibName5=libs/tlv61225
-LibName6=libs/stm32f0xxfxpx
-LibName7=libs/l
-LibName8=libs/led
-LibName9=libs/c
-LibName10=libs/r
-LibName11=libs/pwr
-LibName12=libs/power
-LibName13=libs/mcp1700
-LibName14=device
-LibName15=agg-kicad
+LibName3=libs/l
+LibName4=libs/led
+LibName5=libs/mcp1700
+LibName6=libs/microusb
+LibName7=libs/power
+LibName8=libs/pwr
+LibName9=libs/r
+LibName10=libs/stm32f0xxfxpx
+LibName11=libs/swd_tc
+LibName12=libs/switch
+LibName13=libs/tlv61225
+LibName14=agg-kicad
+LibName15=device
