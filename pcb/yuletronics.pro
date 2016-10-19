@@ -1,4 +1,4 @@
-update=15/10/2016 14:17:31
+update=19/10/2016 20:41:16
 version=1
 last_client=kicad
 [pcbnew]
@@ -44,3 +44,5 @@ LibName12=libs/power
 LibName13=libs/mcp1700
 LibName14=device
 LibName15=agg-kicad
+LibName16=libs/uln2003
+LibName17=libs/xc6210b332mr

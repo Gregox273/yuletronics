@@ -1,0 +1,24 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# XC6210B332MR
+#
+DEF XC6210B332MR U 0 40 Y Y 1 F N
+F0 "U" 450 -350 60 H V C CNN
+F1 "XC6210B332MR" 450 150 60 H V C CNN
+F2 "agg:SOT-23-5" 450 -450 60 H I C CNN
+F3 "http://www.farnell.com/datasheets/2012972.pdf" 450 -650 60 H I C CNN
+F4 "1057803" 450 -550 60 H I C CNN "Farnell"
+F5 "Value" 450 -850 60 H I C CNN "Fieldname"
+F6 "Value" 450 -750 60 H I C CNN "Digikey"
+DRAW
+S 200 100 700 -300 0 1 0 f
+X Vin 1 0 -200 200 R 50 50 1 1 W
+X Vss 2 900 -200 200 L 50 50 1 1 W
+X CE 3 0 0 200 R 50 50 1 1 I
+X NC 4 0 -100 200 R 50 50 1 1 N
+X Vout 5 900 0 200 L 50 50 1 1 w
+ENDDRAW
+ENDDEF
+#
+#End Library

@@ -690,4 +690,18 @@ F 6 "Value" H 8300 2350 60  0001 C CNN "Fieldname"
 	1    8300 2350
 	1    0    0    -1  
 $EndComp
+$Comp
+L PART X2
+U 1 1 5802B3F3
+P 8300 2700
+F 0 "X2" H 8350 2800 50  0000 L CNN
+F 1 "Silk_art" H 8350 2700 50  0000 L CNN
+F 2 "yule:tree_silk_scaled" H 8300 2700 50  0001 C CNN
+F 3 "" H 8300 2700 50  0001 C CNN
+F 4 "Value" H 8300 2700 60  0001 C CNN "Digikey"
+F 5 "Value" H 8300 2700 60  0001 C CNN "Farnell"
+F 6 "Value" H 8300 2700 60  0001 C CNN "Fieldname"
+	1    8300 2700
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
