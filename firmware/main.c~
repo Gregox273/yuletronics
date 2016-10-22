@@ -16,7 +16,8 @@ static THD_FUNCTION(Thread1, arg) {
   chRegSetThreadName("fader");
 
   while (true) {
-    /* palClearLine(LINE_LED_GREEN);
+    /* DEMO:
+    palClearLine(LINE_LED_GREEN);
     chThdSleepMilliseconds(500);
     palSetLine(LINE_LED_GREEN);
     chThdSleepMilliseconds(500);

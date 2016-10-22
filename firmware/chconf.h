@@ -142,7 +142,7 @@
  *
  * @note    The default is @p TRUE.
  */
-#define CH_CFG_USE_TM                       TRUE
+#define CH_CFG_USE_TM                       FALSE
 
 /**
  * @brief   Threads registry APIs.
@@ -329,7 +329,7 @@
  *
  * @note    The default is @p FALSE.
  */
-#define CH_DBG_STATISTICS                   TRUE
+#define CH_DBG_STATISTICS                   FALSE
 
 /**
  * @brief   Debug option, system state check.

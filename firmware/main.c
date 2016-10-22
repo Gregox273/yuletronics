@@ -43,7 +43,7 @@ int main(void) {
   /*
    * Activates the serial driver 2 using the driver default configuration.
    */
-  sdStart(&SD2, NULL);
+  // sdStart(&SD2, NULL);
 
   /*
    * Creates the fader thread.
