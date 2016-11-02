@@ -6,6 +6,25 @@
 #include "hal.h"
 // #include "ch_test.h"
 
+
+static void pwmpcb(PWMDriver *pwmp);
+/*
+ * PWM configuration structure.
+ * Cyclic callback ??, channels 1 to 4 enabled without callbacks,
+ * the active state is a logic one.
+ */
+static PWMConfig pwmcfg = {
+  ??,                                    /* ?Hz PWM clock frequency.   */
+  1000,                                    /* PWM period 1S (in ticks).    */
+  pwmpcb,
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL},
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL},
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL},
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}
+  },
+  0
+};
 /*
  * LED fader thread, times are in milliseconds.
  */
