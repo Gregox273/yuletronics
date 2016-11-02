@@ -23,11 +23,6 @@ build/obj/hal_queues.o: ChibiOS/os/hal/src/hal_queues.c \
  ChibiOS/os/common/ext/CMSIS/include/core_cmFunc.h \
  ChibiOS/os/common/ext/CMSIS/ST/STM32F0xx/system_stm32f0xx.h \
  ChibiOS/os/common/ports/ARMCMx/chcore_v6m.h \
- ChibiOS/os/common/ports/ARMCMx/chcore_timer.h \
- ChibiOS/os/hal/include/hal_st.h \
- ChibiOS/os/hal/ports/STM32/LLD/TIMv1/hal_st_lld.h mcuconf.h \
- ChibiOS/os/hal/ports/STM32/STM32F0xx/stm32_registry.h \
- ChibiOS/os/hal/ports/STM32/LLD/TIMv1/stm32_tim.h \
  ChibiOS/os/rt/include/chdebug.h ChibiOS/os/rt/include/chtrace.h \
  ChibiOS/os/rt/include/chtm.h ChibiOS/os/rt/include/chstats.h \
  ChibiOS/os/rt/include/chschd.h ChibiOS/os/rt/include/chsys.h \
@@ -57,11 +52,16 @@ build/obj/hal_queues.o: ChibiOS/os/hal/src/hal_queues.c \
  ChibiOS/os/hal/include/hal_gpt.h ChibiOS/os/hal/include/hal_i2c.h \
  ChibiOS/os/hal/include/hal_i2s.h ChibiOS/os/hal/include/hal_icu.h \
  ChibiOS/os/hal/include/hal_mac.h ChibiOS/os/hal/include/hal_pwm.h \
+ ChibiOS/os/hal/ports/STM32/LLD/TIMv1/hal_pwm_lld.h \
+ ChibiOS/os/hal/ports/STM32/LLD/TIMv1/stm32_tim.h \
  ChibiOS/os/hal/include/hal_qspi.h ChibiOS/os/hal/include/hal_rtc.h \
  ChibiOS/os/hal/include/hal_serial.h ChibiOS/os/hal/include/hal_sdc.h \
  ChibiOS/os/hal/include/hal_spi.h ChibiOS/os/hal/include/hal_uart.h \
  ChibiOS/os/hal/include/hal_usb.h ChibiOS/os/hal/include/hal_wdg.h \
- ChibiOS/os/hal/include/hal_st.h ChibiOS/os/hal/include/hal_mmc_spi.h \
+ ChibiOS/os/hal/include/hal_st.h \
+ ChibiOS/os/hal/ports/STM32/LLD/TIMv1/hal_st_lld.h mcuconf.h \
+ ChibiOS/os/hal/ports/STM32/STM32F0xx/stm32_registry.h \
+ ChibiOS/os/hal/include/hal_mmc_spi.h \
  ChibiOS/os/hal/include/hal_serial_usb.h
 
 ChibiOS/os/hal/include/hal.h:
@@ -123,18 +123,6 @@ ChibiOS/os/common/ext/CMSIS/include/core_cmFunc.h:
 ChibiOS/os/common/ext/CMSIS/ST/STM32F0xx/system_stm32f0xx.h:
 
 ChibiOS/os/common/ports/ARMCMx/chcore_v6m.h:
-
-ChibiOS/os/common/ports/ARMCMx/chcore_timer.h:
-
-ChibiOS/os/hal/include/hal_st.h:
-
-ChibiOS/os/hal/ports/STM32/LLD/TIMv1/hal_st_lld.h:
-
-mcuconf.h:
-
-ChibiOS/os/hal/ports/STM32/STM32F0xx/stm32_registry.h:
-
-ChibiOS/os/hal/ports/STM32/LLD/TIMv1/stm32_tim.h:
 
 ChibiOS/os/rt/include/chdebug.h:
 
@@ -230,6 +218,10 @@ ChibiOS/os/hal/include/hal_mac.h:
 
 ChibiOS/os/hal/include/hal_pwm.h:
 
+ChibiOS/os/hal/ports/STM32/LLD/TIMv1/hal_pwm_lld.h:
+
+ChibiOS/os/hal/ports/STM32/LLD/TIMv1/stm32_tim.h:
+
 ChibiOS/os/hal/include/hal_qspi.h:
 
 ChibiOS/os/hal/include/hal_rtc.h:
@@ -247,6 +239,12 @@ ChibiOS/os/hal/include/hal_usb.h:
 ChibiOS/os/hal/include/hal_wdg.h:
 
 ChibiOS/os/hal/include/hal_st.h:
+
+ChibiOS/os/hal/ports/STM32/LLD/TIMv1/hal_st_lld.h:
+
+mcuconf.h:
+
+ChibiOS/os/hal/ports/STM32/STM32F0xx/stm32_registry.h:
 
 ChibiOS/os/hal/include/hal_mmc_spi.h:
 

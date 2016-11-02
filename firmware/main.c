@@ -14,14 +14,10 @@ static THD_FUNCTION(Thread1, arg) {
 
   (void)arg;
   chRegSetThreadName("fader");
-
+  // pwms on 4 random channels
+  // Inputs: brightness, switching freq
   while (true) {
-    /* DEMO:
-    palClearLine(LINE_LED_GREEN);
-    chThdSleepMilliseconds(500);
-    palSetLine(LINE_LED_GREEN);
-    chThdSleepMilliseconds(500);
-    */
+
   }
 }
 
@@ -54,6 +50,7 @@ int main(void) {
    * Normal main() thread activity
    */
   while (true) {
+    chThdSleepMilliseconds(1000);
     /* DEMO:
     if (!palReadLine(LINE_ARD_D3))
       test_execute((BaseSequentialStream *)&SD2);

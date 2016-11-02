@@ -6,9 +6,9 @@ Discarded input sections
  .data          0x0000000000000000        0x0 build/obj/chcoreasm_v6m.o
  .bss           0x0000000000000000        0x0 build/obj/chcoreasm_v6m.o
  .text          0x0000000000000000        0x0 build/obj/crt1.o (symbol from plugin)
- .text          0x0000000000000000        0x0 /tmp/ccXNw60r.ltrans0.ltrans.o
- .data          0x0000000000000000        0x0 /tmp/ccXNw60r.ltrans0.ltrans.o
- .bss           0x0000000000000000        0x0 /tmp/ccXNw60r.ltrans0.ltrans.o
+ .text          0x0000000000000000        0x0 /tmp/ccb9u08R.ltrans0.ltrans.o
+ .data          0x0000000000000000        0x0 /tmp/ccb9u08R.ltrans0.ltrans.o
+ .bss           0x0000000000000000        0x0 /tmp/ccb9u08R.ltrans0.ltrans.o
  .text          0x0000000000000000        0x0 build/obj/vectors.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/chsys.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/chdebug.o (symbol from plugin)
@@ -36,11 +36,13 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/obj/hal_queues.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/hal_mmcsd.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/hal_pal.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 build/obj/hal_pwm.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/nvic.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/hal_lld.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/stm32_dma.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/hal_st_lld.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/hal_pal_lld.o (symbol from plugin)
+ .text          0x0000000000000000        0x0 build/obj/hal_pwm_lld.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/board.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/ch_test.o (symbol from plugin)
  .text          0x0000000000000000        0x0 build/obj/test_root.o (symbol from plugin)
@@ -84,7 +86,7 @@ Linker script and memory map
 LOAD build/obj/crt0_v6m.o
 LOAD build/obj/chcoreasm_v6m.o
 LOAD build/obj/crt1.o
-LOAD /tmp/ccXNw60r.ltrans0.ltrans.o
+LOAD /tmp/ccb9u08R.ltrans0.ltrans.o
 LOAD build/obj/vectors.o
 LOAD build/obj/chsys.o
 LOAD build/obj/chdebug.o
@@ -112,11 +114,13 @@ LOAD build/obj/hal_buffers.o
 LOAD build/obj/hal_queues.o
 LOAD build/obj/hal_mmcsd.o
 LOAD build/obj/hal_pal.o
+LOAD build/obj/hal_pwm.o
 LOAD build/obj/nvic.o
 LOAD build/obj/hal_lld.o
 LOAD build/obj/stm32_dma.o
 LOAD build/obj/hal_st_lld.o
 LOAD build/obj/hal_pal_lld.o
+LOAD build/obj/hal_pwm_lld.o
 LOAD build/obj/board.o
 LOAD build/obj/ch_test.o
 LOAD build/obj/test_root.o
@@ -153,7 +157,7 @@ LOAD build/obj/main.o
 
 vectors         0x0000000008000000       0xc0
  *(.vectors)
- .vectors       0x0000000008000000       0xc0 /tmp/ccXNw60r.ltrans0.ltrans.o
+ .vectors       0x0000000008000000       0xc0 /tmp/ccb9u08R.ltrans0.ltrans.o
                 0x0000000008000000                _vectors
 
 xtors           0x00000000080000c0        0x0
@@ -166,7 +170,7 @@ xtors           0x00000000080000c0        0x0
  *(SORT(.fini_array.*))
                 0x00000000080000c0                __fini_array_end = .
 
-.text           0x00000000080000c0      0xf74
+.text           0x00000000080000c0     0x1104
  *(.text)
  .text          0x00000000080000c0       0xd0 build/obj/crt0_v6m.o
                 0x00000000080000c0                Reset_Handler
@@ -177,173 +181,188 @@ xtors           0x00000000080000c0        0x0
                 0x00000000080001cc                _port_exit_from_isr
  *(.text.*)
  *fill*         0x00000000080001dc        0x4 
- .text.Thread1  0x00000000080001e0       0x14 /tmp/ccXNw60r.ltrans0.ltrans.o
+ .text.Thread1  0x00000000080001e0       0x14 /tmp/ccb9u08R.ltrans0.ltrans.o
  *fill*         0x00000000080001f4        0xc 
+ .text.pwm_lld_serve_interrupt
+                0x0000000008000200       0x64 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008000264        0xc 
+ .text._port_irq_epilogue
+                0x0000000008000270       0x3c /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x00000000080002ac        0x4 
  .text.NMI_Handler
-                0x0000000008000200       0x10 /tmp/ccXNw60r.ltrans0.ltrans.o
+                0x00000000080002b0       0x10 /tmp/ccb9u08R.ltrans0.ltrans.o
  .text.chDbgCheckClassS
-                0x0000000008000210       0x20 /tmp/ccXNw60r.ltrans0.ltrans.o
+                0x00000000080002c0       0x20 /tmp/ccb9u08R.ltrans0.ltrans.o
  .text.chDbgCheckClassI
-                0x0000000008000230       0x20 /tmp/ccXNw60r.ltrans0.ltrans.o
+                0x00000000080002e0       0x20 /tmp/ccb9u08R.ltrans0.ltrans.o
  .text.chSchReadyI
-                0x0000000008000250       0x54 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x00000000080002a4        0xc 
+                0x0000000008000300       0x54 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008000354        0xc 
+ .text._dbg_check_leave_isr
+                0x0000000008000360       0x28 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008000388        0x8 
+ .text._dbg_check_enter_isr
+                0x0000000008000390       0x28 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x00000000080003b8        0x8 
  .text._dbg_check_unlock_from_isr
-                0x00000000080002b0       0x24 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x00000000080002d4        0xc 
- .text._dbg_check_lock_from_isr
-                0x00000000080002e0       0x24 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x0000000008000304        0xc 
- .text._idle_thread
-                0x0000000008000310        0x4 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x0000000008000314        0xc 
- .text._unhandled_exception
-                0x0000000008000320        0x4 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x0000000008000324        0xc 
- .text.chSchWakeupS.constprop.7
-                0x0000000008000330       0x6c /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x000000000800039c        0x4 
- .text.chSchGoSleepS
-                0x00000000080003a0       0x44 /tmp/ccXNw60r.ltrans0.ltrans.o
+                0x00000000080003c0       0x24 /tmp/ccb9u08R.ltrans0.ltrans.o
  *fill*         0x00000000080003e4        0xc 
+ .text._dbg_check_lock_from_isr
+                0x00000000080003f0       0x24 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008000414        0xc 
+ .text.wakeup   0x0000000008000420       0x5c /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x000000000800047c        0x4 
+ .text._idle_thread
+                0x0000000008000480        0x4 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008000484        0xc 
+ .text._unhandled_exception
+                0x0000000008000490        0x4 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008000494        0xc 
+ .text.chSchWakeupS.constprop.11
+                0x00000000080004a0       0x6c /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x000000000800050c        0x4 
+ .text.chSchGoSleepS
+                0x0000000008000510       0x44 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008000554        0xc 
+ .text.Vector80
+                0x0000000008000560       0x20 /tmp/ccb9u08R.ltrans0.ltrans.o
  .text.Vector7C
-                0x00000000080003f0      0x148 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x0000000008000538        0x8 
+                0x0000000008000580       0x20 /tmp/ccb9u08R.ltrans0.ltrans.o
+ .text.SysTick_Handler
+                0x00000000080005a0       0x7c /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x000000000800061c        0x4 
  .text.__early_init
-                0x0000000008000540       0xac /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x0000000008000540                __early_init
- *fill*         0x00000000080005ec        0x4 
+                0x0000000008000620       0xac /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x0000000008000620                __early_init
+ *fill*         0x00000000080006cc        0x4 
  .text.chSchDoRescheduleAhead
-                0x00000000080005f0       0x8c /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x00000000080005f0                chSchDoReschedule
- *fill*         0x000000000800067c        0x4 
+                0x00000000080006d0       0x8c /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x00000000080006d0                chSchDoReschedule
+ *fill*         0x000000000800075c        0x4 
  .text._dbg_check_unlock
-                0x0000000008000680       0x24 /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x0000000008000680                _dbg_check_unlock
- *fill*         0x00000000080006a4        0xc 
- .text.chSysUnlock.lto_priv.8
-                0x00000000080006b0       0x2c /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x00000000080006dc        0x4 
+                0x0000000008000760       0x24 /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x0000000008000760                _dbg_check_unlock
+ *fill*         0x0000000008000784        0xc 
+ .text.chSysUnlock.lto_priv.14
+                0x0000000008000790       0x2c /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x00000000080007bc        0x4 
  .text._dbg_check_lock
-                0x00000000080006e0       0x24 /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x00000000080006e0                _dbg_check_lock
- *fill*         0x0000000008000704        0xc 
+                0x00000000080007c0       0x24 /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x00000000080007c0                _dbg_check_lock
+ *fill*         0x00000000080007e4        0xc 
  .text.chCoreAllocAligned
-                0x0000000008000710       0x80 /tmp/ccXNw60r.ltrans0.ltrans.o
+                0x00000000080007f0       0x80 /tmp/ccb9u08R.ltrans0.ltrans.o
  .text.chRegFindThreadByWorkingArea
-                0x0000000008000790      0x438 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x0000000008000bc8        0x8 
+                0x0000000008000870      0x438 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008000ca8        0x8 
  .text.startup.main
-                0x0000000008000bd0      0x37c /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x0000000008000bd0                main
- *fill*         0x0000000008000f4c        0x4 
+                0x0000000008000cb0      0x424 /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x0000000008000cb0                main
+ *fill*         0x00000000080010d4        0xc 
  .text.chThdExit
-                0x0000000008000f50       0x58 /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x0000000008000f50                chThdExit
- *fill*         0x0000000008000fa8        0x8 
+                0x00000000080010e0       0x58 /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x00000000080010e0                chThdExit
+ *fill*         0x0000000008001138        0x8 
  .text.__init_ram_areas
-                0x0000000008000fb0       0x60 /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x0000000008000fb0                __init_ram_areas
+                0x0000000008001140       0x60 /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x0000000008001140                __init_ram_areas
  .text.__default_exit
-                0x0000000008001010        0x4 /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x0000000008001010                __default_exit
- *fill*         0x0000000008001014        0xc 
+                0x00000000080011a0        0x4 /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x00000000080011a0                __default_exit
+ *fill*         0x00000000080011a4        0xc 
  .text.__late_init
-                0x0000000008001020        0x4 /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x0000000008001020                __late_init
- *fill*         0x0000000008001024        0xc 
+                0x00000000080011b0        0x4 /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x00000000080011b0                __late_init
+ *fill*         0x00000000080011b4        0xc 
  .text.__core_init
-                0x0000000008001030        0x4 /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x0000000008001030                __core_init
+                0x00000000080011c0        0x4 /tmp/ccb9u08R.ltrans0.ltrans.o
+                0x00000000080011c0                __core_init
  *(.glue_7t)
- .glue_7t       0x0000000008001034        0x0 linker stubs
+ .glue_7t       0x00000000080011c4        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x0000000008001034        0x0 linker stubs
+ .glue_7        0x00000000080011c4        0x0 linker stubs
  *(.gcc*)
 
-.vfp11_veneer   0x0000000008001034        0x0
- .vfp11_veneer  0x0000000008001034        0x0 linker stubs
+.vfp11_veneer   0x00000000080011c4        0x0
+ .vfp11_veneer  0x00000000080011c4        0x0 linker stubs
 
-.v4_bx          0x0000000008001034        0x0
- .v4_bx         0x0000000008001034        0x0 linker stubs
+.v4_bx          0x00000000080011c4        0x0
+ .v4_bx         0x00000000080011c4        0x0 linker stubs
 
-.iplt           0x0000000008001034        0x0
- .iplt          0x0000000008001034        0x0 build/obj/crt0_v6m.o
+.iplt           0x00000000080011c4        0x0
+ .iplt          0x00000000080011c4        0x0 build/obj/crt0_v6m.o
 
-.rodata         0x0000000008001034      0x214
-                0x0000000008001034                . = ALIGN (0x4)
-                0x0000000008001034                __rodata_base__ = .
+.rodata         0x00000000080011c4      0x21c
+                0x00000000080011c4                . = ALIGN (0x4)
+                0x00000000080011c4                __rodata_base__ = .
  *(.rodata)
  *(.rodata.*)
- .rodata.__func__.5872
-                0x0000000008001034        0xb /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x000000000800103f        0x1 
- .rodata.__func__.6321
-                0x0000000008001040        0xb /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x000000000800104b        0x1 
- .rodata.__func__.5836
-                0x000000000800104c        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.__func__.5132.lto_priv.13
-                0x0000000008001058        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.__func__.5132.lto_priv.14
-                0x0000000008001064        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.__func__.5132.lto_priv.15
-                0x0000000008001070        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.__func__.5132.lto_priv.16
-                0x000000000800107c        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.__func__.5821
-                0x0000000008001088       0x11 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x0000000008001099        0x3 
- .rodata.__func__.6159
-                0x000000000800109c       0x10 /tmp/ccXNw60r.ltrans0.ltrans.o
+ .rodata.wakeup
+                0x00000000080011c4       0x20 /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.6089
+                0x00000000080011e4       0x10 /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5409
+                0x00000000080011f4        0xc /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5744
+                0x0000000008001200        0xc /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5747.lto_priv.13
+                0x000000000800120c        0xb /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008001217        0x1 
+ .rodata.__func__.5750
+                0x0000000008001218       0x14 /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5751
+                0x000000000800122c       0x11 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x000000000800123d        0x3 
+ .rodata.__func__.5766
+                0x0000000008001240        0xc /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5802
+                0x000000000800124c        0xb /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008001257        0x1 
+ .rodata.__func__.5770
+                0x0000000008001258        0xc /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5765
+                0x0000000008001264        0xc /tmp/ccb9u08R.ltrans0.ltrans.o
  .rodata.ram_areas
-                0x00000000080010ac       0x80 /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.str1.4
-                0x000000000800112c       0x68 /tmp/ccXNw60r.ltrans0.ltrans.o
-                                         0x67 (size before relaxing)
- .rodata.__func__.5814
-                0x0000000008001194        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
+                0x0000000008001270       0x80 /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5769
+                0x00000000080012f0        0xb /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x00000000080012fb        0x1 
  .rodata.ch_debug
-                0x00000000080011a0       0x16 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x00000000080011b6        0x2 
- .rodata.__func__.5820
-                0x00000000080011b8       0x14 /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.__func__.5817
-                0x00000000080011cc        0xb /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x00000000080011d7        0x1 
- .rodata.__func__.5835
-                0x00000000080011d8        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.__func__.5840
-                0x00000000080011e4        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.__func__.5476
-                0x00000000080011f0        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
- .rodata.__func__.5839
-                0x00000000080011fc        0xb /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x0000000008001207        0x1 
- .rodata.__func__.5845
-                0x0000000008001208       0x12 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x000000000800121a        0x2 
- .rodata.__func__.5850
-                0x000000000800121c        0xd /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x0000000008001229        0x3 
- .rodata.__func__.5857
-                0x000000000800122c        0xd /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x0000000008001239        0x3 
- .rodata.__func__.5221
-                0x000000000800123c        0xc /tmp/ccXNw60r.ltrans0.ltrans.o
-                0x0000000008001248                . = ALIGN (0x4)
-                0x0000000008001248                __rodata_end__ = .
+                0x00000000080012fc       0x16 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008001312        0x2 
+ .rodata.__func__.5780
+                0x0000000008001314        0xd /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008001321        0x3 
+ .rodata.__func__.5787
+                0x0000000008001324        0xd /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008001331        0x3 
+ .rodata.__func__.5065.lto_priv.20
+                0x0000000008001334        0xc /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5065.lto_priv.21
+                0x0000000008001340        0xc /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5065.lto_priv.22
+                0x000000000800134c        0xc /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5065.lto_priv.19
+                0x0000000008001358        0xc /tmp/ccb9u08R.ltrans0.ltrans.o
+ .rodata.__func__.5775
+                0x0000000008001364       0x12 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000008001376        0x2 
+ .rodata.str1.4
+                0x0000000008001378       0x68 /tmp/ccb9u08R.ltrans0.ltrans.o
+                                         0x67 (size before relaxing)
+                0x00000000080013e0                . = ALIGN (0x4)
+                0x00000000080013e0                __rodata_end__ = .
 
-.rel.dyn        0x0000000008001248        0x0
- .rel.iplt      0x0000000008001248        0x0 build/obj/crt0_v6m.o
+.rel.dyn        0x00000000080013e0        0x0
+ .rel.iplt      0x00000000080013e0        0x0 build/obj/crt0_v6m.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x0000000008001248        0x0
-                0x0000000008001248                __exidx_start = .
+.ARM.exidx      0x00000000080013e0        0x0
+                0x00000000080013e0                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000008001248                __exidx_end = .
+                0x00000000080013e0                __exidx_end = .
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
@@ -375,11 +394,11 @@ xtors           0x00000000080000c0        0x0
                 0x0000000000000000                __ram7_size__ = LENGTH (ram7)
                 0x0000000000000000                __ram7_end__ = (__ram7_start__ + __ram7_size__)
 
-.data           0x0000000020000400        0x0 load address 0x0000000008001248
+.data           0x0000000020000400        0x0 load address 0x00000000080013e0
                 0x0000000020000400                . = ALIGN (0x4)
-                0x0000000008001248                PROVIDE (_textdata, LOADADDR (.data))
+                0x00000000080013e0                PROVIDE (_textdata, LOADADDR (.data))
                 0x0000000020000400                PROVIDE (_data, .)
-                0x0000000008001248                _textdata_start = LOADADDR (.data)
+                0x00000000080013e0                _textdata_start = LOADADDR (.data)
                 0x0000000020000400                _data_start = .
  *(.data)
  *(.data.*)
@@ -388,59 +407,60 @@ xtors           0x00000000080000c0        0x0
                 0x0000000020000400                PROVIDE (_edata, .)
                 0x0000000020000400                _data_end = .
 
-.igot.plt       0x0000000020000400        0x0 load address 0x0000000008001248
+.igot.plt       0x0000000020000400        0x0 load address 0x00000000080013e0
  .igot.plt      0x0000000020000400        0x0 build/obj/crt0_v6m.o
 
-.bss            0x0000000020000400      0x2cc load address 0x0000000008001248
+.bss            0x0000000020000400      0x300 load address 0x00000000080013e0
                 0x0000000020000400                . = ALIGN (0x4)
                 0x0000000020000400                _bss_start = .
  *(.bss)
  *(.bss.*)
  .bss.default_heap
-                0x0000000020000400       0x20 /tmp/ccXNw60r.ltrans0.ltrans.o
- .bss.ch        0x0000000020000420       0x7c /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x000000002000049c        0x4 
- .bss.ch_idle_thread_wa
-                0x00000000200004a0       0xd8 /tmp/ccXNw60r.ltrans0.ltrans.o
- .bss.endmem    0x0000000020000578        0x4 /tmp/ccXNw60r.ltrans0.ltrans.o
- *fill*         0x000000002000057c        0x4 
+                0x0000000020000400       0x20 /tmp/ccb9u08R.ltrans0.ltrans.o
+ .bss.ch        0x0000000020000420       0x7c /tmp/ccb9u08R.ltrans0.ltrans.o
+ .bss.PWMD2     0x000000002000049c       0x1c /tmp/ccb9u08R.ltrans0.ltrans.o
+ .bss.PWMD3     0x00000000200004b8       0x1c /tmp/ccb9u08R.ltrans0.ltrans.o
+ .bss.endmem    0x00000000200004d4        0x4 /tmp/ccb9u08R.ltrans0.ltrans.o
  .bss.waThread1
-                0x0000000020000580      0x148 /tmp/ccXNw60r.ltrans0.ltrans.o
- .bss.nextmem   0x00000000200006c8        0x4 /tmp/ccXNw60r.ltrans0.ltrans.o
+                0x00000000200004d8      0x148 /tmp/ccb9u08R.ltrans0.ltrans.o
+ .bss.nextmem   0x0000000020000620        0x4 /tmp/ccb9u08R.ltrans0.ltrans.o
+ *fill*         0x0000000020000624        0x4 
+ .bss.ch_idle_thread_wa
+                0x0000000020000628       0xd8 /tmp/ccb9u08R.ltrans0.ltrans.o
  *(COMMON)
-                0x00000000200006cc                . = ALIGN (0x4)
-                0x00000000200006cc                _bss_end = .
+                0x0000000020000700                . = ALIGN (0x4)
+                0x0000000020000700                _bss_end = .
                 [!provide]                        PROVIDE (end, .)
 
-.ram0_init      0x00000000200006cc        0x0 load address 0x0000000008001248
-                0x00000000200006cc                . = ALIGN (0x4)
-                0x0000000008001248                __ram0_init_text__ = LOADADDR (.ram0_init)
-                0x00000000200006cc                __ram0_init__ = .
+.ram0_init      0x0000000020000700        0x0 load address 0x00000000080013e0
+                0x0000000020000700                . = ALIGN (0x4)
+                0x00000000080013e0                __ram0_init_text__ = LOADADDR (.ram0_init)
+                0x0000000020000700                __ram0_init__ = .
  *(.ram0_init)
  *(.ram0_init.*)
-                0x00000000200006cc                . = ALIGN (0x4)
+                0x0000000020000700                . = ALIGN (0x4)
 
-.ram0           0x00000000200006cc        0x0 load address 0x0000000008001248
-                0x00000000200006cc                . = ALIGN (0x4)
-                0x00000000200006cc                __ram0_clear__ = .
+.ram0           0x0000000020000700        0x0 load address 0x00000000080013e0
+                0x0000000020000700                . = ALIGN (0x4)
+                0x0000000020000700                __ram0_clear__ = .
  *(.ram0_clear)
  *(.ram0_clear.*)
-                0x00000000200006cc                . = ALIGN (0x4)
-                0x00000000200006cc                __ram0_noinit__ = .
+                0x0000000020000700                . = ALIGN (0x4)
+                0x0000000020000700                __ram0_noinit__ = .
  *(.ram0)
  *(.ram0.*)
-                0x00000000200006cc                . = ALIGN (0x4)
-                0x00000000200006cc                __ram0_free__ = .
+                0x0000000020000700                . = ALIGN (0x4)
+                0x0000000020000700                __ram0_free__ = .
 
-.ram1_init      0x0000000000000000        0x0 load address 0x0000000008001248
+.ram1_init      0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x0000000008001248                __ram1_init_text__ = LOADADDR (.ram1_init)
+                0x00000000080013e0                __ram1_init_text__ = LOADADDR (.ram1_init)
                 0x0000000000000000                __ram1_init__ = .
  *(.ram1_init)
  *(.ram1_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram1           0x0000000000000000        0x0 load address 0x0000000008001248
+.ram1           0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram1_clear__ = .
  *(.ram1_clear)
@@ -452,15 +472,15 @@ xtors           0x00000000080000c0        0x0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram1_free__ = .
 
-.ram2_init      0x0000000000000000        0x0 load address 0x0000000008001248
+.ram2_init      0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x0000000008001248                __ram2_init_text__ = LOADADDR (.ram2_init)
+                0x00000000080013e0                __ram2_init_text__ = LOADADDR (.ram2_init)
                 0x0000000000000000                __ram2_init__ = .
  *(.ram2_init)
  *(.ram2_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram2           0x0000000000000000        0x0 load address 0x0000000008001248
+.ram2           0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram2_clear__ = .
  *(.ram2_clear)
@@ -472,15 +492,15 @@ xtors           0x00000000080000c0        0x0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram2_free__ = .
 
-.ram3_init      0x0000000000000000        0x0 load address 0x0000000008001248
+.ram3_init      0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x0000000008001248                __ram3_init_text__ = LOADADDR (.ram3_init)
+                0x00000000080013e0                __ram3_init_text__ = LOADADDR (.ram3_init)
                 0x0000000000000000                __ram3_init__ = .
  *(.ram3_init)
  *(.ram3_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram3           0x0000000000000000        0x0 load address 0x0000000008001248
+.ram3           0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram3_clear__ = .
  *(.ram3_clear)
@@ -492,15 +512,15 @@ xtors           0x00000000080000c0        0x0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram3_free__ = .
 
-.ram4_init      0x0000000000000000        0x0 load address 0x0000000008001248
+.ram4_init      0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x0000000008001248                __ram4_init_text__ = LOADADDR (.ram4_init)
+                0x00000000080013e0                __ram4_init_text__ = LOADADDR (.ram4_init)
                 0x0000000000000000                __ram4_init__ = .
  *(.ram4_init)
  *(.ram4_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram4           0x0000000000000000        0x0 load address 0x0000000008001248
+.ram4           0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram4_clear__ = .
  *(.ram4_clear)
@@ -512,15 +532,15 @@ xtors           0x00000000080000c0        0x0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram4_free__ = .
 
-.ram5_init      0x0000000000000000        0x0 load address 0x0000000008001248
+.ram5_init      0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x0000000008001248                __ram5_init_text__ = LOADADDR (.ram5_init)
+                0x00000000080013e0                __ram5_init_text__ = LOADADDR (.ram5_init)
                 0x0000000000000000                __ram5_init__ = .
  *(.ram5_init)
  *(.ram5_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram5           0x0000000000000000        0x0 load address 0x0000000008001248
+.ram5           0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram5_clear__ = .
  *(.ram5_clear)
@@ -532,15 +552,15 @@ xtors           0x00000000080000c0        0x0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram5_free__ = .
 
-.ram6_init      0x0000000000000000        0x0 load address 0x0000000008001248
+.ram6_init      0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x0000000008001248                __ram6_init_text__ = LOADADDR (.ram6_init)
+                0x00000000080013e0                __ram6_init_text__ = LOADADDR (.ram6_init)
                 0x0000000000000000                __ram6_init__ = .
  *(.ram6_init)
  *(.ram6_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram6           0x0000000000000000        0x0 load address 0x0000000008001248
+.ram6           0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram6_clear__ = .
  *(.ram6_clear)
@@ -552,15 +572,15 @@ xtors           0x00000000080000c0        0x0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram6_free__ = .
 
-.ram7_init      0x0000000000000000        0x0 load address 0x0000000008001248
+.ram7_init      0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
-                0x0000000008001248                __ram7_init_text__ = LOADADDR (.ram7_init)
+                0x00000000080013e0                __ram7_init_text__ = LOADADDR (.ram7_init)
                 0x0000000000000000                __ram7_init__ = .
  *(.ram7_init)
  *(.ram7_init.*)
                 0x0000000000000000                . = ALIGN (0x4)
 
-.ram7           0x0000000000000000        0x0 load address 0x0000000008001248
+.ram7           0x0000000000000000        0x0 load address 0x00000000080013e0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram7_clear__ = .
  *(.ram7_clear)
@@ -572,12 +592,11 @@ xtors           0x00000000080000c0        0x0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __ram7_free__ = .
 
-.heap           0x00000000200006cc     0x1134
-                0x00000000200006d0                . = ALIGN (0x8)
- *fill*         0x00000000200006cc        0x4 
-                0x00000000200006d0                __heap_base__ = .
+.heap           0x0000000020000700     0x1100
+                0x0000000020000700                . = ALIGN (0x8)
+                0x0000000020000700                __heap_base__ = .
                 0x0000000020001800                . = (ORIGIN (HEAP_RAM) + LENGTH (HEAP_RAM))
- *fill*         0x00000000200006d0     0x1130 
+ *fill*         0x0000000020000700     0x1100 
                 0x0000000020001800                __heap_end__ = .
                 0x0000000000000200                __process_stack_size__ = 0x200
                 0x0000000000000200                __main_stack_size__ = 0x200
@@ -595,37 +614,37 @@ OUTPUT(build/yuletronics.elf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000021       0x21 build/obj/chcoreasm_v6m.o
  .ARM.attributes
-                0x0000000000000042       0x2f /tmp/ccXNw60r.ltrans0.ltrans.o
+                0x0000000000000042       0x2f /tmp/ccb9u08R.ltrans0.ltrans.o
 
 .comment        0x0000000000000000       0x6e
- .comment       0x0000000000000000       0x6e /tmp/ccXNw60r.ltrans0.ltrans.o
+ .comment       0x0000000000000000       0x6e /tmp/ccb9u08R.ltrans0.ltrans.o
                                          0x6f (size before relaxing)
 
-.debug_info     0x0000000000000000     0x3ad4
- .debug_info    0x0000000000000000     0x3ad4 /tmp/ccXNw60r.ltrans0.ltrans.o
+.debug_info     0x0000000000000000     0x4241
+ .debug_info    0x0000000000000000     0x4241 /tmp/ccb9u08R.ltrans0.ltrans.o
 
-.debug_abbrev   0x0000000000000000      0x5d9
- .debug_abbrev  0x0000000000000000      0x5d9 /tmp/ccXNw60r.ltrans0.ltrans.o
+.debug_abbrev   0x0000000000000000      0x5f7
+ .debug_abbrev  0x0000000000000000      0x5f7 /tmp/ccb9u08R.ltrans0.ltrans.o
 
-.debug_loc      0x0000000000000000     0x103b
- .debug_loc     0x0000000000000000     0x103b /tmp/ccXNw60r.ltrans0.ltrans.o
+.debug_loc      0x0000000000000000     0x11c1
+ .debug_loc     0x0000000000000000     0x11c1 /tmp/ccb9u08R.ltrans0.ltrans.o
 
-.debug_aranges  0x0000000000000000       0xd8
+.debug_aranges  0x0000000000000000      0x110
  .debug_aranges
-                0x0000000000000000       0xd8 /tmp/ccXNw60r.ltrans0.ltrans.o
+                0x0000000000000000      0x110 /tmp/ccb9u08R.ltrans0.ltrans.o
 
-.debug_ranges   0x0000000000000000      0x878
- .debug_ranges  0x0000000000000000      0x878 /tmp/ccXNw60r.ltrans0.ltrans.o
+.debug_ranges   0x0000000000000000      0x8f8
+ .debug_ranges  0x0000000000000000      0x8f8 /tmp/ccb9u08R.ltrans0.ltrans.o
 
-.debug_line     0x0000000000000000      0xf80
- .debug_line    0x0000000000000000      0xf80 /tmp/ccXNw60r.ltrans0.ltrans.o
+.debug_line     0x0000000000000000     0x10ec
+ .debug_line    0x0000000000000000     0x10ec /tmp/ccb9u08R.ltrans0.ltrans.o
 
-.debug_str      0x0000000000000000      0xece
- .debug_str     0x0000000000000000      0xece /tmp/ccXNw60r.ltrans0.ltrans.o
-                                        0xf91 (size before relaxing)
+.debug_str      0x0000000000000000      0xfec
+ .debug_str     0x0000000000000000      0xfec /tmp/ccb9u08R.ltrans0.ltrans.o
+                                       0x10c7 (size before relaxing)
 
-.debug_frame    0x0000000000000000      0x244
- .debug_frame   0x0000000000000000      0x244 /tmp/ccXNw60r.ltrans0.ltrans.o
+.debug_frame    0x0000000000000000      0x2e8
+ .debug_frame   0x0000000000000000      0x2e8 /tmp/ccb9u08R.ltrans0.ltrans.o
 
 Cross Reference Table
 
@@ -636,12 +655,15 @@ HardFault_Handler                                 build/obj/vectors.o (symbol fr
 MemManage_Handler                                 build/obj/vectors.o (symbol from plugin)
 NMI_Handler                                       build/obj/chcore_v6m.o (symbol from plugin)
                                                   build/obj/vectors.o (symbol from plugin)
+PWMD2                                             build/obj/hal_pwm_lld.o (symbol from plugin)
+PWMD3                                             build/obj/hal_pwm_lld.o (symbol from plugin)
 PendSV_Handler                                    build/obj/vectors.o (symbol from plugin)
 Reset_Handler                                     build/obj/crt0_v6m.o
-                                                  /tmp/ccXNw60r.ltrans0.ltrans.o
+                                                  /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/vectors.o (symbol from plugin)
 SVC_Handler                                       build/obj/vectors.o (symbol from plugin)
-SysTick_Handler                                   build/obj/vectors.o (symbol from plugin)
+SysTick_Handler                                   build/obj/hal_st_lld.o (symbol from plugin)
+                                                  build/obj/vectors.o (symbol from plugin)
 SystemCoreClock                                   build/obj/hal_lld.o (symbol from plugin)
 UsageFault_Handler                                build/obj/vectors.o (symbol from plugin)
 Vector1C                                          build/obj/vectors.o (symbol from plugin)
@@ -664,9 +686,10 @@ Vector6C                                          build/obj/vectors.o (symbol fr
 Vector70                                          build/obj/vectors.o (symbol from plugin)
 Vector74                                          build/obj/vectors.o (symbol from plugin)
 Vector78                                          build/obj/vectors.o (symbol from plugin)
-Vector7C                                          build/obj/hal_st_lld.o (symbol from plugin)
+Vector7C                                          build/obj/hal_pwm_lld.o (symbol from plugin)
                                                   build/obj/vectors.o (symbol from plugin)
-Vector80                                          build/obj/vectors.o (symbol from plugin)
+Vector80                                          build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/vectors.o (symbol from plugin)
 Vector84                                          build/obj/vectors.o (symbol from plugin)
 Vector88                                          build/obj/vectors.o (symbol from plugin)
 Vector8C                                          build/obj/vectors.o (symbol from plugin)
@@ -682,101 +705,101 @@ VectorB0                                          build/obj/vectors.o (symbol fr
 VectorB4                                          build/obj/vectors.o (symbol from plugin)
 VectorB8                                          build/obj/vectors.o (symbol from plugin)
 VectorBC                                          build/obj/vectors.o (symbol from plugin)
-__core_init                                       /tmp/ccXNw60r.ltrans0.ltrans.o
+__core_init                                       /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v6m.o
-__default_exit                                    /tmp/ccXNw60r.ltrans0.ltrans.o
+__default_exit                                    /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v6m.o
-__early_init                                      /tmp/ccXNw60r.ltrans0.ltrans.o
+__early_init                                      /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/board.o (symbol from plugin)
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v6m.o
 __fini_array_end                                  build/obj/crt0_v6m.o
 __fini_array_start                                build/obj/crt0_v6m.o
-__heap_base__                                     /tmp/ccXNw60r.ltrans0.ltrans.o
+__heap_base__                                     /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chmemcore.o (symbol from plugin)
-__heap_end__                                      /tmp/ccXNw60r.ltrans0.ltrans.o
+__heap_end__                                      /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chmemcore.o (symbol from plugin)
 __init_array_end                                  build/obj/crt0_v6m.o
 __init_array_start                                build/obj/crt0_v6m.o
-__init_ram_areas                                  /tmp/ccXNw60r.ltrans0.ltrans.o
+__init_ram_areas                                  /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v6m.o
-__late_init                                       /tmp/ccXNw60r.ltrans0.ltrans.o
+__late_init                                       /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
                                                   build/obj/crt0_v6m.o
 __main_stack_base__                               build/obj/crt0_v6m.o
-__main_stack_end__                                /tmp/ccXNw60r.ltrans0.ltrans.o
+__main_stack_end__                                /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/vectors.o (symbol from plugin)
                                                   build/obj/crt0_v6m.o
-__main_thread_stack_base__                        /tmp/ccXNw60r.ltrans0.ltrans.o
+__main_thread_stack_base__                        /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chsys.o (symbol from plugin)
 __process_stack_base__                            build/obj/crt0_v6m.o
 __process_stack_end__                             build/obj/crt0_v6m.o
-__ram0_clear__                                    /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram0_clear__                                    /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram0_init__                                     /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram0_init__                                     /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram0_init_text__                                /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram0_init_text__                                /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram0_noinit__                                   /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram0_noinit__                                   /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram1_clear__                                    /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram1_clear__                                    /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram1_init__                                     /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram1_init__                                     /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram1_init_text__                                /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram1_init_text__                                /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram1_noinit__                                   /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram1_noinit__                                   /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram2_clear__                                    /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram2_clear__                                    /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram2_init__                                     /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram2_init__                                     /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram2_init_text__                                /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram2_init_text__                                /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram2_noinit__                                   /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram2_noinit__                                   /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram3_clear__                                    /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram3_clear__                                    /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram3_init__                                     /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram3_init__                                     /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram3_init_text__                                /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram3_init_text__                                /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram3_noinit__                                   /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram3_noinit__                                   /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram4_clear__                                    /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram4_clear__                                    /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram4_init__                                     /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram4_init__                                     /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram4_init_text__                                /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram4_init_text__                                /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram4_noinit__                                   /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram4_noinit__                                   /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram5_clear__                                    /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram5_clear__                                    /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram5_init__                                     /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram5_init__                                     /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram5_init_text__                                /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram5_init_text__                                /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram5_noinit__                                   /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram5_noinit__                                   /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram6_clear__                                    /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram6_clear__                                    /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram6_init__                                     /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram6_init__                                     /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram6_init_text__                                /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram6_init_text__                                /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram6_noinit__                                   /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram6_noinit__                                   /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram7_clear__                                    /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram7_clear__                                    /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram7_init__                                     /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram7_init__                                     /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram7_init_text__                                /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram7_init_text__                                /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
-__ram7_noinit__                                   /tmp/ccXNw60r.ltrans0.ltrans.o
+__ram7_noinit__                                   /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/crt1.o (symbol from plugin)
 _bss_end                                          build/obj/crt0_v6m.o
 _bss_start                                        build/obj/crt0_v6m.o
@@ -789,10 +812,12 @@ _dbg_check_enable                                 build/obj/chdebug.o (symbol fr
                                                   build/obj/test_sequence_001.o (symbol from plugin)
                                                   build/obj/chsys.o (symbol from plugin)
 _dbg_check_enter_isr                              build/obj/chdebug.o (symbol from plugin)
+                                                  build/obj/hal_pwm_lld.o (symbol from plugin)
                                                   build/obj/hal_st_lld.o (symbol from plugin)
 _dbg_check_leave_isr                              build/obj/chdebug.o (symbol from plugin)
+                                                  build/obj/hal_pwm_lld.o (symbol from plugin)
                                                   build/obj/hal_st_lld.o (symbol from plugin)
-_dbg_check_lock                                   /tmp/ccXNw60r.ltrans0.ltrans.o
+_dbg_check_lock                                   /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chdebug.o (symbol from plugin)
                                                   build/obj/test_sequence_012.o (symbol from plugin)
                                                   build/obj/test_sequence_008.o (symbol from plugin)
@@ -804,6 +829,7 @@ _dbg_check_lock                                   /tmp/ccXNw60r.ltrans0.ltrans.o
                                                   build/obj/test_sequence_001.o (symbol from plugin)
                                                   build/obj/test_root.o (symbol from plugin)
                                                   build/obj/ch_test.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
                                                   build/obj/hal_queues.o (symbol from plugin)
                                                   build/obj/hal_buffers.o (symbol from plugin)
                                                   build/obj/chmempools.o (symbol from plugin)
@@ -826,7 +852,7 @@ _dbg_check_lock_from_isr                          build/obj/chdebug.o (symbol fr
                                                   build/obj/chsys.o (symbol from plugin)
 _dbg_check_suspend                                build/obj/chdebug.o (symbol from plugin)
                                                   build/obj/test_sequence_001.o (symbol from plugin)
-_dbg_check_unlock                                 /tmp/ccXNw60r.ltrans0.ltrans.o
+_dbg_check_unlock                                 /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chdebug.o (symbol from plugin)
                                                   build/obj/test_sequence_012.o (symbol from plugin)
                                                   build/obj/test_sequence_008.o (symbol from plugin)
@@ -838,6 +864,7 @@ _dbg_check_unlock                                 /tmp/ccXNw60r.ltrans0.ltrans.o
                                                   build/obj/test_sequence_001.o (symbol from plugin)
                                                   build/obj/test_root.o (symbol from plugin)
                                                   build/obj/ch_test.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
                                                   build/obj/hal_queues.o (symbol from plugin)
                                                   build/obj/hal_buffers.o (symbol from plugin)
                                                   build/obj/chmempools.o (symbol from plugin)
@@ -866,18 +893,19 @@ _pal_lld_init                                     build/obj/hal_pal_lld.o (symbo
 _pal_lld_setgroupmode                             build/obj/hal_pal_lld.o (symbol from plugin)
                                                   build/obj/hal_pal.o (symbol from plugin)
 _port_exit_from_isr                               build/obj/chcoreasm_v6m.o
-                                                  /tmp/ccXNw60r.ltrans0.ltrans.o
+                                                  /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chcore_v6m.o (symbol from plugin)
 _port_irq_epilogue                                build/obj/chcore_v6m.o (symbol from plugin)
+                                                  build/obj/hal_pwm_lld.o (symbol from plugin)
                                                   build/obj/hal_st_lld.o (symbol from plugin)
 _port_switch                                      build/obj/chcoreasm_v6m.o
-                                                  /tmp/ccXNw60r.ltrans0.ltrans.o
+                                                  /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chschd.o (symbol from plugin)
 _port_switch_from_isr                             build/obj/chcoreasm_v6m.o
-                                                  /tmp/ccXNw60r.ltrans0.ltrans.o
+                                                  /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chcore_v6m.o (symbol from plugin)
 _port_thread_start                                build/obj/chcoreasm_v6m.o
-                                                  /tmp/ccXNw60r.ltrans0.ltrans.o
+                                                  /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chthreads.o (symbol from plugin)
 _scheduler_init                                   build/obj/chschd.o (symbol from plugin)
                                                   build/obj/chsys.o (symbol from plugin)
@@ -912,7 +940,7 @@ _thread_init                                      build/obj/chthreads.o (symbol 
 _thread_memfill                                   build/obj/chthreads.o (symbol from plugin)
                                                   build/obj/chdynamic.o (symbol from plugin)
 _unhandled_exception                              build/obj/vectors.o (symbol from plugin)
-_vectors                                          /tmp/ccXNw60r.ltrans0.ltrans.o
+_vectors                                          /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/vectors.o (symbol from plugin)
 _vt_init                                          build/obj/chvt.o (symbol from plugin)
                                                   build/obj/chsys.o (symbol from plugin)
@@ -932,6 +960,7 @@ ch                                                build/obj/chschd.o (symbol fro
                                                   build/obj/test_sequence_001.o (symbol from plugin)
                                                   build/obj/test_root.o (symbol from plugin)
                                                   build/obj/ch_test.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
                                                   build/obj/hal_queues.o (symbol from plugin)
                                                   build/obj/hal_buffers.o (symbol from plugin)
                                                   build/obj/chmempools.o (symbol from plugin)
@@ -1120,7 +1149,7 @@ chRegFindThreadByWorkingArea                      build/obj/chregistry.o (symbol
                                                   build/obj/chthreads.o (symbol from plugin)
 chRegFirstThread                                  build/obj/chregistry.o (symbol from plugin)
 chRegNextThread                                   build/obj/chregistry.o (symbol from plugin)
-chSchDoReschedule                                 /tmp/ccXNw60r.ltrans0.ltrans.o
+chSchDoReschedule                                 /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chschd.o (symbol from plugin)
                                                   build/obj/chcoreasm_v6m.o
 chSchDoRescheduleAhead                            build/obj/chschd.o (symbol from plugin)
@@ -1212,7 +1241,9 @@ chSysHalt                                         build/obj/chsys.o (symbol from
                                                   build/obj/test_sequence_001.o (symbol from plugin)
                                                   build/obj/test_root.o (symbol from plugin)
                                                   build/obj/ch_test.o (symbol from plugin)
+                                                  build/obj/hal_pwm_lld.o (symbol from plugin)
                                                   build/obj/nvic.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
                                                   build/obj/hal_pal.o (symbol from plugin)
                                                   build/obj/hal_queues.o (symbol from plugin)
                                                   build/obj/hal_buffers.o (symbol from plugin)
@@ -1269,7 +1300,7 @@ chThdDequeueNextI                                 build/obj/chthreads.o (symbol 
 chThdEnqueueTimeoutS                              build/obj/chthreads.o (symbol from plugin)
                                                   build/obj/hal_queues.o (symbol from plugin)
                                                   build/obj/hal_buffers.o (symbol from plugin)
-chThdExit                                         /tmp/ccXNw60r.ltrans0.ltrans.o
+chThdExit                                         /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/chthreads.o (symbol from plugin)
                                                   build/obj/test_sequence_012.o (symbol from plugin)
                                                   build/obj/chcoreasm_v6m.o
@@ -1284,6 +1315,7 @@ chThdResumeS                                      build/obj/chthreads.o (symbol 
 chThdSetPriority                                  build/obj/chthreads.o (symbol from plugin)
                                                   build/obj/test_sequence_002.o (symbol from plugin)
 chThdSleep                                        build/obj/chthreads.o (symbol from plugin)
+                                                  build/obj/main.o (symbol from plugin)
                                                   build/obj/test_sequence_012.o (symbol from plugin)
                                                   build/obj/test_sequence_007.o (symbol from plugin)
                                                   build/obj/test_sequence_005.o (symbol from plugin)
@@ -1336,14 +1368,16 @@ iqObjectInit                                      build/obj/hal_queues.o (symbol
 iqPutI                                            build/obj/hal_queues.o (symbol from plugin)
 iqReadTimeout                                     build/obj/hal_queues.o (symbol from plugin)
 iqResetI                                          build/obj/hal_queues.o (symbol from plugin)
-main                                              /tmp/ccXNw60r.ltrans0.ltrans.o
+main                                              /tmp/ccb9u08R.ltrans0.ltrans.o
                                                   build/obj/main.o (symbol from plugin)
                                                   build/obj/crt0_v6m.o
 nvicClearPending                                  build/obj/nvic.o (symbol from plugin)
 nvicDisableVector                                 build/obj/nvic.o (symbol from plugin)
+                                                  build/obj/hal_pwm_lld.o (symbol from plugin)
 nvicEnableVector                                  build/obj/nvic.o (symbol from plugin)
-                                                  build/obj/hal_st_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm_lld.o (symbol from plugin)
 nvicSetSystemHandlerPriority                      build/obj/nvic.o (symbol from plugin)
+                                                  build/obj/hal_st_lld.o (symbol from plugin)
 obqFlush                                          build/obj/hal_buffers.o (symbol from plugin)
 obqGetEmptyBufferTimeout                          build/obj/hal_buffers.o (symbol from plugin)
 obqGetEmptyBufferTimeoutS                         build/obj/hal_buffers.o (symbol from plugin)
@@ -1366,17 +1400,44 @@ palSetBusMode                                     build/obj/hal_pal.o (symbol fr
 palWriteBus                                       build/obj/hal_pal.o (symbol from plugin)
 pal_default_config                                build/obj/board.o (symbol from plugin)
                                                   build/obj/hal.o (symbol from plugin)
+pwmChangePeriod                                   build/obj/hal_pwm.o (symbol from plugin)
+pwmDisableChannel                                 build/obj/hal_pwm.o (symbol from plugin)
+pwmDisableChannelNotification                     build/obj/hal_pwm.o (symbol from plugin)
+pwmDisablePeriodicNotification                    build/obj/hal_pwm.o (symbol from plugin)
+pwmEnableChannel                                  build/obj/hal_pwm.o (symbol from plugin)
+pwmEnableChannelNotification                      build/obj/hal_pwm.o (symbol from plugin)
+pwmEnablePeriodicNotification                     build/obj/hal_pwm.o (symbol from plugin)
+pwmInit                                           build/obj/hal_pwm.o (symbol from plugin)
+                                                  build/obj/hal.o (symbol from plugin)
+pwmObjectInit                                     build/obj/hal_pwm.o (symbol from plugin)
+                                                  build/obj/hal_pwm_lld.o (symbol from plugin)
+pwmStart                                          build/obj/hal_pwm.o (symbol from plugin)
+pwmStop                                           build/obj/hal_pwm.o (symbol from plugin)
+pwm_lld_disable_channel                           build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
+pwm_lld_disable_channel_notification              build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
+pwm_lld_disable_periodic_notification             build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
+pwm_lld_enable_channel                            build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
+pwm_lld_enable_channel_notification               build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
+pwm_lld_enable_periodic_notification              build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
+pwm_lld_init                                      build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
+pwm_lld_serve_interrupt                           build/obj/hal_pwm_lld.o (symbol from plugin)
+pwm_lld_start                                     build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
+pwm_lld_stop                                      build/obj/hal_pwm_lld.o (symbol from plugin)
+                                                  build/obj/hal_pwm.o (symbol from plugin)
 stGetAlarm                                        build/obj/hal_st.o (symbol from plugin)
 stInit                                            build/obj/hal_st.o (symbol from plugin)
                                                   build/obj/hal.o (symbol from plugin)
 stSetAlarm                                        build/obj/hal_st.o (symbol from plugin)
-                                                  build/obj/chvt.o (symbol from plugin)
-                                                  build/obj/chsys.o (symbol from plugin)
 stStartAlarm                                      build/obj/hal_st.o (symbol from plugin)
-                                                  build/obj/chvt.o (symbol from plugin)
 stStopAlarm                                       build/obj/hal_st.o (symbol from plugin)
-                                                  build/obj/chvt.o (symbol from plugin)
-                                                  build/obj/chsys.o (symbol from plugin)
 st_lld_init                                       build/obj/hal_st_lld.o (symbol from plugin)
                                                   build/obj/hal_st.o (symbol from plugin)
 stm32_clock_init                                  build/obj/hal_lld.o (symbol from plugin)
