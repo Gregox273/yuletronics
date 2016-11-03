@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>C:/Users/grego/Documents/Yuletronics/yuletronics/pcb/yuletronics.sch</source>
-    <date>03/11/2016 19:29:44</date>
+    <date>03/11/2016 19:37:53</date>
     <tool>Eeschema 4.0.0-rc1-stable</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -425,9 +425,6 @@
     <comp ref="J3">
       <value>CONN_01x08</value>
       <footprint>yule:Interboard</footprint>
-      <fields>
-        <field name="Farnell">Value</field>
-      </fields>
       <libsource lib="agg-kicad" part="CONN_01x08"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>58029304</tstamp>
@@ -435,9 +432,6 @@
     <comp ref="X1">
       <value>Silk_art</value>
       <footprint>yule:tree_silk_scaled</footprint>
-      <fields>
-        <field name="Farnell">Value</field>
-      </fields>
       <libsource lib="agg-kicad" part="PART"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5802B8A6</tstamp>
@@ -547,6 +541,16 @@
     </comp>
   </components>
   <libparts>
+    <libpart lib="conn" part="CONN_01x02">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_01x02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="swd_tc" part="SWD_TC">
       <fields>
         <field name="Reference">P</field>
@@ -562,14 +566,44 @@
         <pin num="6" name="SWO" type="input"/>
       </pins>
     </libpart>
-    <libpart lib="conn" part="CONN_01x02">
+    <libpart lib="l" part="L">
       <fields>
-        <field name="Reference">J</field>
-        <field name="Value">CONN_01x02</field>
+        <field name="Reference">L</field>
+        <field name="Value">L</field>
       </fields>
       <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="led" part="LED">
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="c" part="C">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="r" part="R">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="microusb" part="MICROUSB">
@@ -655,46 +689,6 @@
         <pin num="18" name="PA10/PA12" type="BiDi"/>
         <pin num="19" name="PA13" type="BiDi"/>
         <pin num="20" name="PA14" type="BiDi"/>
-      </pins>
-    </libpart>
-    <libpart lib="l" part="L">
-      <fields>
-        <field name="Reference">L</field>
-        <field name="Value">L</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="led" part="LED">
-      <fields>
-        <field name="Reference">D</field>
-        <field name="Value">LED</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="c" part="C">
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">C</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="r" part="R">
-      <fields>
-        <field name="Reference">R</field>
-        <field name="Value">R</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="device" part="LED_RABG">
@@ -784,17 +778,17 @@
     <library logical="swd_tc">
       <uri>libs\swd_tc.lib</uri>
     </library>
-    <library logical="switch">
-      <uri>libs\switch.lib</uri>
-    </library>
-    <library logical="microusb">
-      <uri>libs\microusb.lib</uri>
-    </library>
     <library logical="tlv61225">
       <uri>libs\tlv61225.lib</uri>
     </library>
     <library logical="conn">
       <uri>libs\conn.lib</uri>
+    </library>
+    <library logical="microusb">
+      <uri>libs\microusb.lib</uri>
+    </library>
+    <library logical="switch">
+      <uri>libs\switch.lib</uri>
     </library>
     <library logical="stm32f0xxfxpx">
       <uri>libs\stm32f0xxfxpx.lib</uri>
@@ -805,23 +799,23 @@
     <library logical="device">
       <uri>C:\Program Files\KiCad\share\kicad\library\device.lib</uri>
     </library>
-    <library logical="l">
-      <uri>libs\l.lib</uri>
-    </library>
     <library logical="c">
       <uri>libs\c.lib</uri>
     </library>
     <library logical="r">
       <uri>libs\r.lib</uri>
     </library>
+    <library logical="l">
+      <uri>libs\l.lib</uri>
+    </library>
     <library logical="agg-kicad">
       <uri>C:\Users\grego\Documents\Yuletronics\yuletronics\agg-kicad\agg-kicad.lib</uri>
     </library>
-    <library logical="uln2003">
-      <uri>libs\uln2003.lib</uri>
-    </library>
     <library logical="xc6210b332mr">
       <uri>libs\xc6210b332mr.lib</uri>
+    </library>
+    <library logical="uln2003">
+      <uri>libs\uln2003.lib</uri>
     </library>
   </libraries>
   <nets>

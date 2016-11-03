@@ -2,7 +2,7 @@ Bill Of Materials
 =================
 
 Source file: tree_2.xml
-Date: 2016-11-03T19:19:22.423593
+Date: 2016-11-03T19:35:34.243892
 
 Parts Missing Footprints
 ------------------------
@@ -10,23 +10,20 @@ Parts Missing Footprints
 
 Parts Missing Order Codes
 -------------------------
-
+J1     CONN_01x08      yule:Interboard
+J2     CONN_01x08      yule:Interboard
+X1     Silk_art        yule:tree_silk_scaled
+X2     Silk_art        yule:tree_silk_scaled
 
 Inconsistent Order Codes
 ------------------------
-  Farnell
-  ~~~~~~~
-    Value: 
-      J1     CONN_01x08      yule:Interboard
-      X1     Silk_art        yule:tree_silk_scaled
-      X2     Silk_art        yule:tree_silk_scaled
+
 
 Vendor Specific BOMs
 --------------------
   Farnell
   ~~~~~~~
 1855553,6,6x LED_RABG CREE_RGB_LED
-Value,4,4x Silk_art CONN_01x08 tree_si
 9333029,12,12x 30 0805
 9332375,6,6x 100 0805
 
@@ -34,7 +31,6 @@ Value,4,4x Silk_art CONN_01x08 tree_si
 Assembly BOM
 ------------
 1855553              6   LED_RABG        CREE_RGB_LED    D1 D11 D12 D2 D4 D9
-Value                4   Silk_art,CONN_01x08 tree_silk_scaled,Interboard J1 J2 X1 X2
 9333029              12  30              0805            R13 R14 R19 R22 R28 R30 R31 R33 R37 R40 R8 R9
 9332375              6   100             0805            R16 R25 R27 R34 R5 R6
 

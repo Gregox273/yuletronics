@@ -1243,7 +1243,6 @@ F 0 "J3" H 8950 3100 50  0000 L CNN
 F 1 "CONN_01x08" H 8950 2200 50  0000 L CNN
 F 2 "yule:Interboard" H 9000 3000 50  0001 C CNN
 F 3 "" H 9000 3000 50  0001 C CNN
-F 4 "Value" H 9000 3000 60  0001 C CNN "Farnell"
 	1    9000 3000
 	1    0    0    -1  
 $EndComp
@@ -1299,7 +1298,6 @@ F 0 "X1" H 6100 6000 50  0000 L CNN
 F 1 "Silk_art" H 6100 5900 50  0000 L CNN
 F 2 "yule:tree_silk_scaled" H 6050 5900 50  0001 C CNN
 F 3 "" H 6050 5900 50  0001 C CNN
-F 4 "Value" H 6050 5900 60  0001 C CNN "Farnell"
 	1    6050 5900
 	1    0    0    -1  
 $EndComp
