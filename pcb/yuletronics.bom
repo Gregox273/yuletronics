@@ -1,0 +1,67 @@
+Bill Of Materials
+=================
+
+Source file: yuletronics.xml
+Date: 2016-11-03T19:29:44.587426
+
+Parts Missing Footprints
+------------------------
+
+
+Parts Missing Order Codes
+-------------------------
+P1     SWD_TC          agg:TC2030-NL
+
+Inconsistent Order Codes
+------------------------
+  Farnell
+  ~~~~~~~
+    Value: 
+      J3     CONN_01x08      yule:Interboard
+      X1     Silk_art        yule:tree_silk_scaled
+
+Vendor Specific BOMs
+--------------------
+  Farnell
+  ~~~~~~~
+2320851,3,3x 10u 0805
+2320853,2,2x 1u 0805
+1467825,1,1x ULN2003D1013TR SOIC-16
+2469549,1,1x STM32F042F6P6 TSSOP-20
+1702632,1,1x BATT AAA_HOLDER
+1855553,6,6x LED_RABG CREE_RGB_LED
+2616849,1,1x 4u7 2016M
+9333029,12,12x 30 0805
+2492362,1,1x TLV61225 SC-70-6
+1201430,1,1x PWR_SWITCH SPDT_SWITCH
+9332391,4,4x 10k 0805
+Value,2,2x Silk_art CONN_01x08 tree_si
+1568023,1,1x MICROUSB MICROUSB_MOLEX_475
+2056809,2,2x BOOTLOAD MOM_SWITCH
+9332375,8,8x 100 0805
+2099242,2,2x LED 0805-LED
+1759265,2,2x 100n 0805
+1057803,1,1x XC6210B332MR SOT-23-5
+
+
+Assembly BOM
+------------
+2320851              3   10u             0805            C1 C4 C7
+2320853              2   1u              0805            C5 C6
+1467825              1   ULN2003D1013TR  SOIC-16         U2
+2469549              1   STM32F042F6P6   TSSOP-20        IC1
+1702632              1   BATT            AAA_HOLDER      J1
+1855553              6   LED_RABG        CREE_RGB_LED    D10 D13 D14 D3 D5 D6
+2616849              1   4u7             2016M           L1
+9333029              12  30              0805            R12 R15 R20 R21 R23 R24 R29 R32 R38 R39 R41 R42
+2492362              1   TLV61225        SC-70-6         IC3
+1201430              1   PWR_SWITCH      SPDT_SWITCH     SW2
+9332391              4   10k             0805            R1 R2 R3 R4
+Value                2   Silk_art,CONN_01x08 tree_silk_scaled,Interboard J3 X1
+1568023              1   MICROUSB        MICROUSB_MOLEX_47589-0001 J2
+2056809              2   BOOTLOAD        MOM_SWITCH      SW1 SW3
+9332375              8   100             0805            R17 R18 R26 R35 R36 R5 R6 R7
+2099242              2   LED             0805-LED        D1 D2
+1759265              2   100n            0805            C2 C3
+1057803              1   XC6210B332MR    SOT-23-5        U1
+

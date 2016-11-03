@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>C:/Users/grego/Documents/Yuletronics/yuletronics/pcb/yuletronics.sch</source>
+    <date>03/11/2016 19:29:44</date>
+    <tool>Eeschema 4.0.0-rc1-stable</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Electronics Club Michalmas Project</title>
+        <company/>
+        <rev>1</rev>
+        <date>2016-10-11</date>
+        <source>yuletronics.sch</source>
+        <comment number="1" value="Drawn By: D Turner &amp; A Greig"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="IC1">
+      <value>STM32F042F6P6</value>
+      <footprint>agg:TSSOP-20</footprint>
+      <datasheet>http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00105814.pdf</datasheet>
+      <fields>
+        <field name="Farnell">2469549</field>
+      </fields>
+      <libsource lib="stm32f0xxfxpx" part="STM32F0xxFxPx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD69DB</tstamp>
+    </comp>
+    <comp ref="P1">
+      <value>SWD_TC</value>
+      <footprint>agg:TC2030-NL</footprint>
+      <libsource lib="swd_tc" part="SWD_TC"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD6AC0</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>MICROUSB</value>
+      <footprint>agg:MICROUSB_MOLEX_47589-0001</footprint>
+      <fields>
+        <field name="Farnell">1568023</field>
+      </fields>
+      <libsource lib="microusb" part="MICROUSB"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD6B23</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>100n</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">1759265</field>
+      </fields>
+      <libsource lib="c" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD6DEE</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>100n</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">1759265</field>
+      </fields>
+      <libsource lib="c" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD6E2B</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>10u</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">2320851</field>
+      </fields>
+      <libsource lib="c" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD6E81</tstamp>
+    </comp>
+    <comp ref="IC3">
+      <value>TLV61225</value>
+      <footprint>agg:SC-70-6</footprint>
+      <datasheet>http://www.ti.com/lit/ds/symlink/tlv61225.pdf</datasheet>
+      <fields>
+        <field name="Farnell">2492362</field>
+      </fields>
+      <libsource lib="tlv61225" part="TLV61225"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD7549</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>BATT</value>
+      <footprint>agg:AAA_HOLDER</footprint>
+      <datasheet>http://www.farnell.com/datasheets/1703957.pdf</datasheet>
+      <fields>
+        <field name="Farnell">1702632</field>
+      </fields>
+      <libsource lib="conn" part="CONN_01x02"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD7790</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>10u</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">2320851</field>
+      </fields>
+      <libsource lib="c" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD795E</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>10u</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">2320851</field>
+      </fields>
+      <libsource lib="c" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD7B28</tstamp>
+    </comp>
+    <comp ref="L1">
+      <value>4u7</value>
+      <footprint>agg:2016M</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2113219.pdf</datasheet>
+      <fields>
+        <field name="Farnell">2616849</field>
+      </fields>
+      <libsource lib="l" part="L"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD7C5C</tstamp>
+    </comp>
+    <comp ref="SW2">
+      <value>PWR_SWITCH</value>
+      <footprint>agg:SPDT_SWITCH</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2044662.pdf</datasheet>
+      <fields>
+        <field name="Farnell">1201430</field>
+      </fields>
+      <libsource lib="switch" part="SWITCH_SPDT"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD810A</tstamp>
+    </comp>
+    <comp ref="SW1">
+      <value>BOOTLOAD</value>
+      <footprint>yule:MOM_SWITCH</footprint>
+      <datasheet>http://www.farnell.com/datasheets/1582297.pdf</datasheet>
+      <fields>
+        <field name="Farnell">2056809</field>
+      </fields>
+      <libsource lib="switch" part="SWITCH_MOM"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD6EFE</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>10k</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332391</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD708A</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>10k</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332391</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD8940</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>10k</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332391</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57FD8C2E</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801FAD5</tstamp>
+    </comp>
+    <comp ref="R15">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801FAE3</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801FAEA</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801FAF1</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802013F</tstamp>
+    </comp>
+    <comp ref="R23">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802014D</tstamp>
+    </comp>
+    <comp ref="R20">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020154</tstamp>
+    </comp>
+    <comp ref="R17">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802015B</tstamp>
+    </comp>
+    <comp ref="D6">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802016B</tstamp>
+    </comp>
+    <comp ref="R24">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020179</tstamp>
+    </comp>
+    <comp ref="R21">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020180</tstamp>
+    </comp>
+    <comp ref="R18">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020187</tstamp>
+    </comp>
+    <comp ref="R36">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020685</tstamp>
+    </comp>
+    <comp ref="R39">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802067E</tstamp>
+    </comp>
+    <comp ref="R42">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020677</tstamp>
+    </comp>
+    <comp ref="D14">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020669</tstamp>
+    </comp>
+    <comp ref="R35">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020659</tstamp>
+    </comp>
+    <comp ref="R38">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020652</tstamp>
+    </comp>
+    <comp ref="R41">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802064B</tstamp>
+    </comp>
+    <comp ref="D13">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802063D</tstamp>
+    </comp>
+    <comp ref="R26">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580205D5</tstamp>
+    </comp>
+    <comp ref="R29">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580205CE</tstamp>
+    </comp>
+    <comp ref="R32">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580205C7</tstamp>
+    </comp>
+    <comp ref="D10">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580205B9</tstamp>
+    </comp>
+    <comp ref="J3">
+      <value>CONN_01x08</value>
+      <footprint>yule:Interboard</footprint>
+      <fields>
+        <field name="Farnell">Value</field>
+      </fields>
+      <libsource lib="agg-kicad" part="CONN_01x08"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58029304</tstamp>
+    </comp>
+    <comp ref="X1">
+      <value>Silk_art</value>
+      <footprint>yule:tree_silk_scaled</footprint>
+      <fields>
+        <field name="Farnell">Value</field>
+      </fields>
+      <libsource lib="agg-kicad" part="PART"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802B8A6</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>ULN2003D1013TR</value>
+      <footprint>agg:SOIC-16</footprint>
+      <datasheet>http://www.farnell.com/datasheets/1955910.pdf</datasheet>
+      <fields>
+        <field name="Farnell">1467825</field>
+      </fields>
+      <libsource lib="uln2003" part="ULN2003D1013TR"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5807DADE</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>XC6210B332MR</value>
+      <footprint>agg:SOT-23-5</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2012972.pdf</datasheet>
+      <fields>
+        <field name="Farnell">1057803</field>
+      </fields>
+      <libsource lib="xc6210b332mr" part="XC6210B332MR"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5808BB90</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>1u</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">2320853</field>
+      </fields>
+      <libsource lib="c" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5808CA0D</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>1u</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">2320853</field>
+      </fields>
+      <libsource lib="c" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5808CF05</tstamp>
+    </comp>
+    <comp ref="SW3">
+      <value>BOOTLOAD</value>
+      <footprint>yule:MOM_SWITCH</footprint>
+      <datasheet>http://www.farnell.com/datasheets/1582297.pdf</datasheet>
+      <fields>
+        <field name="Farnell">2056809</field>
+      </fields>
+      <libsource lib="switch" part="SWITCH_MOM"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5808E24A</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>10k</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332391</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5808FB7A</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>LED</value>
+      <footprint>agg:0805-LED</footprint>
+      <fields>
+        <field name="Farnell">2099242</field>
+      </fields>
+      <libsource lib="led" part="LED"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58097B31</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>LED</value>
+      <footprint>agg:0805-LED</footprint>
+      <fields>
+        <field name="Farnell">2099242</field>
+      </fields>
+      <libsource lib="led" part="LED"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580998C3</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58099A5B</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58099CFF</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="swd_tc" part="SWD_TC">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">SWD_TC</field>
+        <field name="Footprint">agg:TC2030-NL</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="SWDIO" type="BiDi"/>
+        <pin num="3" name="~RST" type="output"/>
+        <pin num="4" name="SWDCLK" type="output"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="SWO" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01x02">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_01x02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="microusb" part="MICROUSB">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">MICROUSB</field>
+        <field name="Footprint">agg:MICROUSB_MOLEX_47589-0001</field>
+        <field name="Farnell">1568023</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC" type="power_in"/>
+        <pin num="2" name="D-" type="BiDi"/>
+        <pin num="3" name="D+" type="BiDi"/>
+        <pin num="4" name="ID" type="passive"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="S" name="SHIELD" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="switch" part="SWITCH_MOM">
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SWITCH_MOM</field>
+      </fields>
+      <pins>
+        <pin num="1" name="&quot;~&quot;" type="passive"/>
+        <pin num="2" name="&quot;~&quot;" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="switch" part="SWITCH_SPDT">
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SWITCH_SPDT</field>
+      </fields>
+      <pins>
+        <pin num="1" name="&quot;~&quot;" type="passive"/>
+        <pin num="2" name="&quot;~&quot;" type="passive"/>
+        <pin num="3" name="&quot;~&quot;" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="tlv61225" part="TLV61225">
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">TLV61225</field>
+        <field name="Footprint">agg:SC-70-6</field>
+        <field name="Datasheet">http://www.ti.com/lit/ds/symlink/tlv61225.pdf</field>
+        <field name="Farnell">2492362</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VIN" type="power_in"/>
+        <pin num="2" name="FB" type="input"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="VOUT" type="power_out"/>
+        <pin num="5" name="L" type="passive"/>
+        <pin num="6" name="EN" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="stm32f0xxfxpx" part="STM32F0xxFxPx">
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">STM32F0xxFxPx</field>
+        <field name="Footprint">agg:TSSOP-20</field>
+        <field name="Datasheet">http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00105814.pdf</field>
+        <field name="Farnell">2469549</field>
+      </fields>
+      <pins>
+        <pin num="1" name="PB8/BOOT0" type="BiDi"/>
+        <pin num="2" name="PF0" type="BiDi"/>
+        <pin num="3" name="PF1" type="BiDi"/>
+        <pin num="4" name="NRST" type="input"/>
+        <pin num="5" name="VDDA" type="power_in"/>
+        <pin num="6" name="PA0" type="BiDi"/>
+        <pin num="7" name="PA1" type="BiDi"/>
+        <pin num="8" name="PA2" type="BiDi"/>
+        <pin num="9" name="PA3" type="BiDi"/>
+        <pin num="10" name="PA4" type="BiDi"/>
+        <pin num="11" name="PA5" type="BiDi"/>
+        <pin num="12" name="PA6" type="BiDi"/>
+        <pin num="13" name="PA7" type="BiDi"/>
+        <pin num="14" name="PB1" type="BiDi"/>
+        <pin num="15" name="VSS" type="power_in"/>
+        <pin num="16" name="VDD" type="power_in"/>
+        <pin num="17" name="PA9/PA11" type="BiDi"/>
+        <pin num="18" name="PA10/PA12" type="BiDi"/>
+        <pin num="19" name="PA13" type="BiDi"/>
+        <pin num="20" name="PA14" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="l" part="L">
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">L</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="led" part="LED">
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="c" part="C">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="r" part="R">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="LED_RABG">
+      <description>Common Anode RGB LED</description>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED_RABG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RED_CATHODE" type="passive"/>
+        <pin num="2" name="COMMON_ANODE" type="passive"/>
+        <pin num="3" name="BLUE_CATHODE" type="passive"/>
+        <pin num="4" name="GREEN_CATHODE" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="agg-kicad" part="CONN_01x08">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_01x08</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+        <pin num="6" name="6" type="passive"/>
+        <pin num="7" name="7" type="passive"/>
+        <pin num="8" name="8" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="agg-kicad" part="PART">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">PART</field>
+      </fields>
+    </libpart>
+    <libpart lib="xc6210b332mr" part="XC6210B332MR">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">XC6210B332MR</field>
+        <field name="Footprint">agg:SOT-23-5</field>
+        <field name="Datasheet">http://www.farnell.com/datasheets/2012972.pdf</field>
+        <field name="Farnell">1057803</field>
+        <field name="Fieldname">Value</field>
+        <field name="Digikey">Value</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Vin" type="power_in"/>
+        <pin num="2" name="Vss" type="power_in"/>
+        <pin num="3" name="CE" type="input"/>
+        <pin num="4" name="NC" type="NotConnected"/>
+        <pin num="5" name="Vout" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="uln2003" part="ULN2003D1013TR">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ULN2003D1013TR</field>
+        <field name="Footprint">agg:SOIC-16</field>
+        <field name="Datasheet">http://www.farnell.com/datasheets/1955910.pdf</field>
+        <field name="Farnell">1467825</field>
+        <field name="Fieldname">Value</field>
+        <field name="Digikey">Value</field>
+      </fields>
+      <pins>
+        <pin num="1" name="IN_1" type="input"/>
+        <pin num="2" name="IN_2" type="input"/>
+        <pin num="3" name="IN_3" type="input"/>
+        <pin num="4" name="IN_4" type="input"/>
+        <pin num="5" name="IN_5" type="input"/>
+        <pin num="6" name="IN_6" type="input"/>
+        <pin num="7" name="IN_7" type="input"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="COMMON" type="power_out"/>
+        <pin num="10" name="OUT_7" type="output"/>
+        <pin num="11" name="OUT_6" type="output"/>
+        <pin num="12" name="OUT_5" type="output"/>
+        <pin num="13" name="OUT_4" type="output"/>
+        <pin num="14" name="OUT_3" type="output"/>
+        <pin num="15" name="OUT_2" type="output"/>
+        <pin num="16" name="OUT_1" type="output"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="swd_tc">
+      <uri>libs\swd_tc.lib</uri>
+    </library>
+    <library logical="switch">
+      <uri>libs\switch.lib</uri>
+    </library>
+    <library logical="microusb">
+      <uri>libs\microusb.lib</uri>
+    </library>
+    <library logical="tlv61225">
+      <uri>libs\tlv61225.lib</uri>
+    </library>
+    <library logical="conn">
+      <uri>libs\conn.lib</uri>
+    </library>
+    <library logical="stm32f0xxfxpx">
+      <uri>libs\stm32f0xxfxpx.lib</uri>
+    </library>
+    <library logical="led">
+      <uri>libs\led.lib</uri>
+    </library>
+    <library logical="device">
+      <uri>C:\Program Files\KiCad\share\kicad\library\device.lib</uri>
+    </library>
+    <library logical="l">
+      <uri>libs\l.lib</uri>
+    </library>
+    <library logical="c">
+      <uri>libs\c.lib</uri>
+    </library>
+    <library logical="r">
+      <uri>libs\r.lib</uri>
+    </library>
+    <library logical="agg-kicad">
+      <uri>C:\Users\grego\Documents\Yuletronics\yuletronics\agg-kicad\agg-kicad.lib</uri>
+    </library>
+    <library logical="uln2003">
+      <uri>libs\uln2003.lib</uri>
+    </library>
+    <library logical="xc6210b332mr">
+      <uri>libs\xc6210b332mr.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(D13-Pad3)">
+      <node ref="D13" pin="3"/>
+      <node ref="R41" pin="1"/>
+    </net>
+    <net code="2" name="3v3">
+      <node ref="SW1" pin="1"/>
+      <node ref="P1" pin="1"/>
+      <node ref="IC1" pin="16"/>
+      <node ref="IC1" pin="5"/>
+      <node ref="C3" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="SW2" pin="2"/>
+      <node ref="D6" pin="2"/>
+      <node ref="R5" pin="1"/>
+      <node ref="D3" pin="2"/>
+      <node ref="R6" pin="1"/>
+      <node ref="D13" pin="2"/>
+      <node ref="SW3" pin="1"/>
+      <node ref="D14" pin="2"/>
+      <node ref="D10" pin="2"/>
+      <node ref="J3" pin="4"/>
+      <node ref="J3" pin="5"/>
+      <node ref="D5" pin="2"/>
+    </net>
+    <net code="3" name="Net-(D13-Pad4)">
+      <node ref="D13" pin="4"/>
+      <node ref="R38" pin="1"/>
+    </net>
+    <net code="4" name="Net-(D13-Pad1)">
+      <node ref="R35" pin="1"/>
+      <node ref="D13" pin="1"/>
+    </net>
+    <net code="5" name="/LED2R">
+      <node ref="R26" pin="2"/>
+      <node ref="R35" pin="2"/>
+      <node ref="J3" pin="7"/>
+      <node ref="R36" pin="2"/>
+      <node ref="U2" pin="12"/>
+    </net>
+    <net code="6" name="/LED2G">
+      <node ref="U2" pin="13"/>
+      <node ref="R29" pin="2"/>
+      <node ref="R39" pin="2"/>
+      <node ref="R38" pin="2"/>
+      <node ref="J3" pin="8"/>
+    </net>
+    <net code="7" name="/LED2B">
+      <node ref="R32" pin="2"/>
+      <node ref="R42" pin="2"/>
+      <node ref="J3" pin="6"/>
+      <node ref="U2" pin="11"/>
+      <node ref="R41" pin="2"/>
+    </net>
+    <net code="8" name="Net-(IC1-Pad14)">
+      <node ref="IC1" pin="14"/>
+    </net>
+    <net code="9" name="Net-(D14-Pad3)">
+      <node ref="R42" pin="1"/>
+      <node ref="D14" pin="3"/>
+    </net>
+    <net code="10" name="Net-(D10-Pad3)">
+      <node ref="D10" pin="3"/>
+      <node ref="R32" pin="1"/>
+    </net>
+    <net code="11" name="Net-(D10-Pad4)">
+      <node ref="D10" pin="4"/>
+      <node ref="R29" pin="1"/>
+    </net>
+    <net code="12" name="Net-(D10-Pad1)">
+      <node ref="D10" pin="1"/>
+      <node ref="R26" pin="1"/>
+    </net>
+    <net code="13" name="/LED1G">
+      <node ref="R20" pin="2"/>
+      <node ref="R21" pin="2"/>
+      <node ref="U2" pin="15"/>
+      <node ref="J3" pin="2"/>
+      <node ref="R12" pin="2"/>
+    </net>
+    <net code="14" name="Net-(D6-Pad4)">
+      <node ref="R21" pin="1"/>
+      <node ref="D6" pin="4"/>
+    </net>
+    <net code="15" name="Net-(D6-Pad3)">
+      <node ref="D6" pin="3"/>
+      <node ref="R24" pin="1"/>
+    </net>
+    <net code="16" name="/LED1B">
+      <node ref="U2" pin="16"/>
+      <node ref="R15" pin="2"/>
+      <node ref="R24" pin="2"/>
+      <node ref="J3" pin="3"/>
+      <node ref="R23" pin="2"/>
+    </net>
+    <net code="17" name="/LED1R">
+      <node ref="R17" pin="2"/>
+      <node ref="R7" pin="2"/>
+      <node ref="U2" pin="14"/>
+      <node ref="J3" pin="1"/>
+      <node ref="R18" pin="2"/>
+    </net>
+    <net code="18" name="Net-(D6-Pad1)">
+      <node ref="R18" pin="1"/>
+      <node ref="D6" pin="1"/>
+    </net>
+    <net code="19" name="Net-(D5-Pad3)">
+      <node ref="R23" pin="1"/>
+      <node ref="D5" pin="3"/>
+    </net>
+    <net code="20" name="Net-(D5-Pad4)">
+      <node ref="R20" pin="1"/>
+      <node ref="D5" pin="4"/>
+    </net>
+    <net code="21" name="Net-(D5-Pad1)">
+      <node ref="R17" pin="1"/>
+      <node ref="D5" pin="1"/>
+    </net>
+    <net code="22" name="Net-(D14-Pad4)">
+      <node ref="D14" pin="4"/>
+      <node ref="R39" pin="1"/>
+    </net>
+    <net code="23" name="Net-(D14-Pad1)">
+      <node ref="D14" pin="1"/>
+      <node ref="R36" pin="1"/>
+    </net>
+    <net code="24" name="GND">
+      <node ref="P1" pin="5"/>
+      <node ref="IC3" pin="3"/>
+      <node ref="C3" pin="1"/>
+      <node ref="C1" pin="1"/>
+      <node ref="C2" pin="1"/>
+      <node ref="U1" pin="2"/>
+      <node ref="J1" pin="1"/>
+      <node ref="J2" pin="5"/>
+      <node ref="IC1" pin="15"/>
+      <node ref="D2" pin="1"/>
+      <node ref="D1" pin="1"/>
+      <node ref="R1" pin="2"/>
+      <node ref="R4" pin="2"/>
+      <node ref="U2" pin="8"/>
+      <node ref="R3" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="C6" pin="2"/>
+      <node ref="C5" pin="2"/>
+    </net>
+    <net code="25" name="Net-(U1-Pad4)">
+      <node ref="U1" pin="4"/>
+    </net>
+    <net code="26" name="Net-(D1-Pad2)">
+      <node ref="R5" pin="2"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="27" name="Net-(D2-Pad2)">
+      <node ref="D2" pin="2"/>
+      <node ref="R6" pin="2"/>
+    </net>
+    <net code="28" name="Net-(U2-Pad10)">
+      <node ref="U2" pin="10"/>
+    </net>
+    <net code="29" name="Net-(U2-Pad9)">
+      <node ref="U2" pin="9"/>
+    </net>
+    <net code="30" name="Net-(U2-Pad7)">
+      <node ref="U2" pin="7"/>
+    </net>
+    <net code="31" name="/led_2B">
+      <node ref="IC1" pin="13"/>
+      <node ref="U2" pin="6"/>
+    </net>
+    <net code="32" name="/led_2R">
+      <node ref="U2" pin="5"/>
+      <node ref="IC1" pin="6"/>
+    </net>
+    <net code="33" name="/led_2G">
+      <node ref="IC1" pin="7"/>
+      <node ref="U2" pin="4"/>
+    </net>
+    <net code="34" name="/led_1R">
+      <node ref="U2" pin="3"/>
+      <node ref="IC1" pin="8"/>
+    </net>
+    <net code="35" name="/led_1G">
+      <node ref="U2" pin="2"/>
+      <node ref="IC1" pin="9"/>
+    </net>
+    <net code="36" name="/led_1B">
+      <node ref="U2" pin="1"/>
+      <node ref="IC1" pin="12"/>
+    </net>
+    <net code="37" name="Net-(IC3-Pad5)">
+      <node ref="IC3" pin="5"/>
+      <node ref="L1" pin="2"/>
+    </net>
+    <net code="38" name="Net-(J2-PadS)">
+      <node ref="J2" pin="S"/>
+    </net>
+    <net code="39" name="Net-(J2-Pad4)">
+      <node ref="J2" pin="4"/>
+    </net>
+    <net code="40" name="/USB_3V3">
+      <node ref="SW2" pin="3"/>
+      <node ref="U1" pin="5"/>
+      <node ref="C6" pin="1"/>
+    </net>
+    <net code="41" name="Net-(P1-Pad6)">
+      <node ref="P1" pin="6"/>
+    </net>
+    <net code="42" name="Net-(P1-Pad3)">
+      <node ref="P1" pin="3"/>
+    </net>
+    <net code="43" name="/BUTTON">
+      <node ref="IC1" pin="10"/>
+      <node ref="SW3" pin="2"/>
+      <node ref="R4" pin="1"/>
+    </net>
+    <net code="44" name="Net-(IC1-Pad4)">
+      <node ref="IC1" pin="4"/>
+    </net>
+    <net code="45" name="Net-(IC1-Pad3)">
+      <node ref="IC1" pin="3"/>
+    </net>
+    <net code="46" name="Net-(IC1-Pad2)">
+      <node ref="IC1" pin="2"/>
+    </net>
+    <net code="47" name="/SWCLK">
+      <node ref="P1" pin="4"/>
+      <node ref="IC1" pin="20"/>
+    </net>
+    <net code="48" name="/SWDIO">
+      <node ref="P1" pin="2"/>
+      <node ref="IC1" pin="19"/>
+    </net>
+    <net code="49" name="/USB_DP">
+      <node ref="J2" pin="3"/>
+      <node ref="IC1" pin="18"/>
+    </net>
+    <net code="50" name="/USB_DM">
+      <node ref="IC1" pin="17"/>
+      <node ref="J2" pin="2"/>
+    </net>
+    <net code="51" name="/USB_DETECT">
+      <node ref="R2" pin="2"/>
+      <node ref="R3" pin="1"/>
+      <node ref="IC1" pin="11"/>
+    </net>
+    <net code="52" name="Net-(D3-Pad4)">
+      <node ref="R12" pin="1"/>
+      <node ref="D3" pin="4"/>
+    </net>
+    <net code="53" name="Net-(D3-Pad3)">
+      <node ref="R15" pin="1"/>
+      <node ref="D3" pin="3"/>
+    </net>
+    <net code="54" name="Net-(D3-Pad1)">
+      <node ref="D3" pin="1"/>
+      <node ref="R7" pin="1"/>
+    </net>
+    <net code="55" name="5v">
+      <node ref="R2" pin="1"/>
+      <node ref="C5" pin="1"/>
+      <node ref="U1" pin="3"/>
+      <node ref="U1" pin="1"/>
+      <node ref="J2" pin="1"/>
+    </net>
+    <net code="56" name="/BATT_3V3">
+      <node ref="IC3" pin="4"/>
+      <node ref="IC3" pin="2"/>
+      <node ref="C7" pin="1"/>
+      <node ref="SW2" pin="1"/>
+    </net>
+    <net code="57" name="/SWITCH">
+      <node ref="SW1" pin="2"/>
+      <node ref="R1" pin="1"/>
+      <node ref="IC1" pin="1"/>
+    </net>
+    <net code="58" name="/VBATT">
+      <node ref="J1" pin="2"/>
+      <node ref="L1" pin="1"/>
+      <node ref="C4" pin="1"/>
+      <node ref="IC3" pin="6"/>
+      <node ref="IC3" pin="1"/>
+    </net>
+  </nets>
+</export>

@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>C:/Users/grego/Documents/Yuletronics/yuletronics/pcb_2/tree_2.sch</source>
+    <date>03/11/2016 19:19:22</date>
+    <tool>Eeschema 4.0.0-rc1-stable</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Electronics Club Michalmas Project</title>
+        <company/>
+        <rev>1</rev>
+        <date>2016-10-11</date>
+        <source>tree_2.sch</source>
+        <comment number="1" value="Drawn By: D Turner &amp; A Greig"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="D9">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802058D</tstamp>
+    </comp>
+    <comp ref="R31">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802059B</tstamp>
+    </comp>
+    <comp ref="R28">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580205A2</tstamp>
+    </comp>
+    <comp ref="R25">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580205A9</tstamp>
+    </comp>
+    <comp ref="D11">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580205E5</tstamp>
+    </comp>
+    <comp ref="R33">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580205F3</tstamp>
+    </comp>
+    <comp ref="R30">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580205FA</tstamp>
+    </comp>
+    <comp ref="R27">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020601</tstamp>
+    </comp>
+    <comp ref="D12">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020611</tstamp>
+    </comp>
+    <comp ref="R40">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802061F</tstamp>
+    </comp>
+    <comp ref="R37">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020626</tstamp>
+    </comp>
+    <comp ref="R34">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802062D</tstamp>
+    </comp>
+    <comp ref="R16">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802012F</tstamp>
+    </comp>
+    <comp ref="R19">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020128</tstamp>
+    </comp>
+    <comp ref="R22">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020121</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>58020113</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801F770</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801F769</tstamp>
+    </comp>
+    <comp ref="R14">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801F762</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801F754</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>100</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9332375</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801C5A4</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801C500</tstamp>
+    </comp>
+    <comp ref="R13">
+      <value>30</value>
+      <footprint>agg:0805</footprint>
+      <fields>
+        <field name="Farnell">9333029</field>
+      </fields>
+      <libsource lib="r" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801C071</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>LED_RABG</value>
+      <footprint>yule:CREE_RGB_LED</footprint>
+      <datasheet>http://www.farnell.com/datasheets/1965387.pdf</datasheet>
+      <fields>
+        <field name="Farnell">1855553</field>
+      </fields>
+      <libsource lib="device" part="LED_RABG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5801A64D</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>CONN_01x08</value>
+      <footprint>yule:Interboard</footprint>
+      <fields>
+        <field name="Farnell">Value</field>
+      </fields>
+      <libsource lib="agg-kicad" part="CONN_01x08"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802F7BD</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>CONN_01x08</value>
+      <footprint>yule:Interboard</footprint>
+      <fields>
+        <field name="Farnell">Value</field>
+      </fields>
+      <libsource lib="agg-kicad" part="CONN_01x08"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>580303E2</tstamp>
+    </comp>
+    <comp ref="X1">
+      <value>Silk_art</value>
+      <footprint>yule:tree_silk_scaled</footprint>
+      <fields>
+        <field name="Farnell">Value</field>
+      </fields>
+      <libsource lib="agg-kicad" part="PART"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802B070</tstamp>
+    </comp>
+    <comp ref="X2">
+      <value>Silk_art</value>
+      <footprint>yule:tree_silk_scaled</footprint>
+      <fields>
+        <field name="Farnell">Value</field>
+      </fields>
+      <libsource lib="agg-kicad" part="PART"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5802B3F3</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="device" part="LED_RABG">
+      <description>Common Anode RGB LED</description>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED_RABG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RED_CATHODE" type="passive"/>
+        <pin num="2" name="COMMON_ANODE" type="passive"/>
+        <pin num="3" name="BLUE_CATHODE" type="passive"/>
+        <pin num="4" name="GREEN_CATHODE" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="r" part="R">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="agg-kicad" part="CONN_01x08">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_01x08</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+        <pin num="6" name="6" type="passive"/>
+        <pin num="7" name="7" type="passive"/>
+        <pin num="8" name="8" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="agg-kicad" part="PART">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">PART</field>
+      </fields>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="device">
+      <uri>C:\Program Files\KiCad\share\kicad\library\device.lib</uri>
+    </library>
+    <library logical="r">
+      <uri>C:\Users\grego\Documents\Yuletronics\yuletronics\pcb\libs\r.lib</uri>
+    </library>
+    <library logical="agg-kicad">
+      <uri>C:\Users\grego\Documents\Yuletronics\yuletronics\agg-kicad\agg-kicad.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(D4-Pad3)">
+      <node ref="D4" pin="3"/>
+      <node ref="R22" pin="1"/>
+    </net>
+    <net code="2" name="Net-(D4-Pad4)">
+      <node ref="R19" pin="1"/>
+      <node ref="D4" pin="4"/>
+    </net>
+    <net code="3" name="Net-(D4-Pad1)">
+      <node ref="D4" pin="1"/>
+      <node ref="R16" pin="1"/>
+    </net>
+    <net code="4" name="Net-(D12-Pad3)">
+      <node ref="D12" pin="3"/>
+      <node ref="R40" pin="1"/>
+    </net>
+    <net code="5" name="Net-(D2-Pad3)">
+      <node ref="R14" pin="1"/>
+      <node ref="D2" pin="3"/>
+    </net>
+    <net code="6" name="Net-(D2-Pad4)">
+      <node ref="R9" pin="1"/>
+      <node ref="D2" pin="4"/>
+    </net>
+    <net code="7" name="Net-(D2-Pad1)">
+      <node ref="D2" pin="1"/>
+      <node ref="R6" pin="1"/>
+    </net>
+    <net code="8" name="Net-(D1-Pad3)">
+      <node ref="D1" pin="3"/>
+      <node ref="R13" pin="1"/>
+    </net>
+    <net code="9" name="Net-(D1-Pad4)">
+      <node ref="R8" pin="1"/>
+      <node ref="D1" pin="4"/>
+    </net>
+    <net code="10" name="Net-(D1-Pad1)">
+      <node ref="D1" pin="1"/>
+      <node ref="R5" pin="1"/>
+    </net>
+    <net code="11" name="/LED2B">
+      <node ref="J1" pin="3"/>
+      <node ref="R40" pin="2"/>
+      <node ref="J1" pin="6"/>
+      <node ref="R33" pin="2"/>
+      <node ref="R31" pin="2"/>
+    </net>
+    <net code="12" name="Net-(D9-Pad1)">
+      <node ref="R25" pin="1"/>
+      <node ref="D9" pin="1"/>
+    </net>
+    <net code="13" name="Net-(D9-Pad4)">
+      <node ref="D9" pin="4"/>
+      <node ref="R28" pin="1"/>
+    </net>
+    <net code="14" name="Net-(D9-Pad3)">
+      <node ref="R31" pin="1"/>
+      <node ref="D9" pin="3"/>
+    </net>
+    <net code="15" name="Net-(D11-Pad1)">
+      <node ref="D11" pin="1"/>
+      <node ref="R27" pin="1"/>
+    </net>
+    <net code="16" name="Net-(D11-Pad4)">
+      <node ref="R30" pin="1"/>
+      <node ref="D11" pin="4"/>
+    </net>
+    <net code="17" name="Net-(D11-Pad3)">
+      <node ref="R33" pin="1"/>
+      <node ref="D11" pin="3"/>
+    </net>
+    <net code="18" name="Net-(D12-Pad1)">
+      <node ref="R34" pin="1"/>
+      <node ref="D12" pin="1"/>
+    </net>
+    <net code="19" name="Net-(D12-Pad4)">
+      <node ref="R37" pin="1"/>
+      <node ref="D12" pin="4"/>
+    </net>
+    <net code="20" name="/LED1R">
+      <node ref="R5" pin="2"/>
+      <node ref="J2" pin="1"/>
+      <node ref="J2" pin="8"/>
+      <node ref="R6" pin="2"/>
+      <node ref="R16" pin="2"/>
+    </net>
+    <net code="21" name="/LED1B">
+      <node ref="R22" pin="2"/>
+      <node ref="R14" pin="2"/>
+      <node ref="R13" pin="2"/>
+      <node ref="J2" pin="6"/>
+      <node ref="J2" pin="3"/>
+    </net>
+    <net code="22" name="/LED1G">
+      <node ref="R9" pin="2"/>
+      <node ref="R8" pin="2"/>
+      <node ref="R19" pin="2"/>
+      <node ref="J2" pin="2"/>
+      <node ref="J2" pin="7"/>
+    </net>
+    <net code="23" name="3v3">
+      <node ref="D11" pin="2"/>
+      <node ref="D4" pin="2"/>
+      <node ref="D2" pin="2"/>
+      <node ref="J1" pin="4"/>
+      <node ref="D1" pin="2"/>
+      <node ref="J1" pin="5"/>
+      <node ref="J2" pin="4"/>
+      <node ref="J2" pin="5"/>
+      <node ref="D12" pin="2"/>
+      <node ref="D9" pin="2"/>
+    </net>
+    <net code="25" name="/LED2R">
+      <node ref="J1" pin="7"/>
+      <node ref="R34" pin="2"/>
+      <node ref="R27" pin="2"/>
+      <node ref="R25" pin="2"/>
+      <node ref="J1" pin="2"/>
+    </net>
+    <net code="26" name="/LED2G">
+      <node ref="R28" pin="2"/>
+      <node ref="J1" pin="8"/>
+      <node ref="R37" pin="2"/>
+      <node ref="R30" pin="2"/>
+      <node ref="J1" pin="1"/>
+    </net>
+  </nets>
+</export>
