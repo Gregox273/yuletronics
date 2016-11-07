@@ -6,16 +6,14 @@
 #include "hal.h"
 // #include "ch_test.h"
 
-
 static void pwmpcb(PWMDriver *pwmp);
+
 /*
  * PWM configuration structure.
- * Cyclic callback ??, channels 1 to 4 enabled without callbacks,
- * the active state is a logic one.
  */
-static PWMConfig pwmcfg = {
-  ??,                                    /* ?Hz PWM clock frequency.   */
-  1000,                                    /* PWM period 1S (in ticks).    */
+static PWMConfig pwm2cfg = {
+  10000,                                 /* 10kHz PWM clock frequency.   */
+  10,                                    /* PWM period 0.01S (in ticks).    */
   pwmpcb,
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},
@@ -25,19 +23,78 @@ static PWMConfig pwmcfg = {
   },
   0
 };
+
+static PWMConfig pwm3cfg = {
+  10000,                                 /* 10kHz PWM clock frequency.   */
+  10,                                    /* PWM period 0.01S (in ticks).    */
+  pwmpcb,
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL},
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL},
+    {PWM_OUTPUT_DISABLED, NULL},
+    {PWM_OUTPUT_DISABLED, NULL}
+  },
+  0
+};
+
+/*
+ * PWM cyclic callback.
+ * Changes duty cycle
+ */
+static void pwmpcb(PWMDriver *pwmp) {
+ 
+  (void)pwmp;
+  // Do things
+  /* Increment fade completion/progress variable
+   * which varies from 0 to brighness
+   */
+}
+
 /*
  * LED fader thread, times are in milliseconds.
  */
-static THD_WORKING_AREA(waThread1, 128);
-static THD_FUNCTION(Thread1, arg) {
-
-  (void)arg;
-  chRegSetThreadName("fader");
-  // pwms on 4 random channels
-  // Inputs: brightness, switching freq
+static WORKING_AREA(waLEDS, 128);
+static msg LEDS(void * arg) {
+  Mailbox* mbox = (Mailbox *)arg;
+  msg_t msg, result;
+  
   while (true) {
-
+     result = chMBFetch(mbox, &msg, TIME_INFINITE);  // Fetch LED request
+        if(result == RDY_OK) {
+			//if(msg & 1) - demo of if statement checking a bit of msg?
+			
+            // Do PWM things
+        }
   }
+  
+  return 0;
+}
+
+static WORKING_AREA(waLEDC, 128);
+static msg_t LEDC(void * arg) {
+	Mailbox* mbox = (Mailbox *)arg;
+	uint8_t current_state = 1;  // Current led channel state (channels 1 to 3)
+	
+	while(true){
+	  uint8_t next_state = 0;
+	  // To limit current usage, only 4 channels can be lit at a time
+	  uint8_t num_remaining = 4 - ((current_state & 1) + ((current_state & 2) / 2) + ((current_state & 4) / 4));
+	  
+	  next_state = next_state || (1 << (rand() % 4));  // Guarantee at least one set bit
+	  for (int i = 1; i < num_remaining; i++){
+		next_state = next_state || (1 << (rand() % 4)); /* If shifted by 3, next state doesn't change
+		                                                * as only least 3 bits are used */
+	  }
+	  next_state = next_state & 7;  //Ensure only 3 bits can be set 
+	  //chMBPost(mbox, next_state & brightness bits, TIME_INFINITE);
+	  /* Message format (LSB is #0):
+	   * 0 to 2 : led channels to light next
+	              note that current number of lit channels + next no. of lit channels <= 4
+       * 3 to 5 : brightness level (0 to 7 in decimal)
+	   */
+	  chThdSleepMilliseconds(5000);  // Change colours every 5 seconds
+    }
+	return 0;
 }
 
 /*
@@ -55,25 +112,22 @@ int main(void) {
   halInit();
   chSysInit();
 
-  /*
-   * Activates the serial driver 2 using the driver default configuration.
-   */
-  // sdStart(&SD2, NULL);
+  //Create thread mailbox
+  Mailbox mbox;
+  msg_t mbox_buffer[3];
+  chMBInit(&mbox,mbox_buffer, 3);
+  
+  // Initialise PWM drivers
+  pwmStart(&PWMD2, &pwm2cfg);
+  pwmStart(&PWMD3, &pwm3cfg);
 
-  /*
-   * Creates the fader thread.
-   */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+  // Create threads.
+  chThdCreateStatic(waLEDS, sizeof(waLEDS), NORMALPRIO, LEDS, (void *)&mbox);
+  chThdCreateStatic(waLEDC, sizeof(waLEDC), NORMALPRIO, LEDC, (void *)&mbox);
 
-  /*
-   * Normal main() thread activity
-   */
+  // Normal main() thread activity
   while (true) {
-    chThdSleepMilliseconds(1000);
-    /* DEMO:
-    if (!palReadLine(LINE_ARD_D3))
-      test_execute((BaseSequentialStream *)&SD2);
-    chThdSleepMilliseconds(500);
-    */
+    chThdSleepMilliseconds(5000);
   }
+  return 0;
 }
