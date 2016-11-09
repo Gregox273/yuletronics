@@ -21,20 +21,28 @@
 
 
 // Shared variable to define current LED channel state (3 bits)
-static uint8_t current_state = 1;  // Current led channel state (channels 1 to 3)
+static uint8_t current_state = 1;  // Current led channel state (channels 1 to 3) 00000BGR
 
-/*
- * PWM cyclic callback.
- * Changes duty cycle
- */
-static void pwmpcb(PWMDriver *pwmp) {
- 
-  (void)pwmp;
-  // Do things
-  
-  /* Increment fade completion/progress variable
-   * which varies from 0 to brighness
-   */
+// Shared variable defines which channel is active
+static bool current_group = false; /* led group that is currently active 
+                                    * false for led group 1, true for group 2 */
+
+static void updateleds(uint8_t bits, bool group, uint16_t dcycle){
+  //Function to abstract pwm channels
+  // bits contain rgb combination 00000BGR
+  // group  = false for group 1, true for group 2
+  // dcycle is duty cycle in systicks
+  if (group){
+    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 1, dcycle);
+    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 2, dcycle);
+    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 2, dcycle);
+  }
+
+  else {
+    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 3, dcycle);
+    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 4, dcycle);
+    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 1, dcycle);
+  }
 }
 
 
@@ -44,7 +52,7 @@ static void pwmpcb(PWMDriver *pwmp) {
 static PWMConfig pwm2cfg = {
   10000,                                 /* 10kHz PWM clock frequency.   */
   PWM_PERIOD,                            /* PWM period 0.01S (in ticks).    */
-  pwmpcb,
+  NULL,
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},
@@ -58,7 +66,7 @@ static PWMConfig pwm2cfg = {
 static PWMConfig pwm3cfg = {
   10000,                                 /* 10kHz PWM clock frequency.   */
   PWM_PERIOD,                            /* PWM period 0.01S (in ticks).    */
-  pwmpcb,
+  NULL,
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},
@@ -77,35 +85,27 @@ static THD_WORKING_AREA(waLEDS, 128);
 static THD_FUNCTION(LEDS, arg) {
   mailbox_t* mbox = (mailbox_t *)arg;
   msg_t msg, result;
-  bool current_group = false; /* led group that is currently active 
-                               * false for led group 1, true for group 2 */
   
   while (true) {
       result = chMBFetch(mbox, &msg, TIME_INFINITE);  // Fetch LED request
       if(result == MSG_OK) {
         uint8_t brightness = (msg & 56) / 8;       // Separate brightness value into a 0-8 (decimal) value
         brightness = PWM_PERIOD * brightness / 8;  // Now express as a number of systicks (max 1 wave period) 
-        // Do PWM things
-        current_group = !current_group; // Other group is now active
+
+        
         for(uint16_t dcycle = 0; dcycle < brightness; dcycle++){
+          //fade down current state
+          updateleds(current_state, current_group, brightness - dcycle);          
 
-          !!!!!
-          //fade down existing colours
-          !!!!!
+          //fade up next state
+          updateleds(msg & 7, !current_group, dcycle);
 
-          if (current_group){
-            //if (msg & COL_RED);
-	    //if (msg & COL_GRN);
-	    //if (msg & COL_BLU);
-          }
-
-          else {
-            //if (msg & COL_RED);
-	    //if (msg & COL_GRN);
-	    //if (msg & COL_BLU);
-	  }
-          chThdSleepMicroseconds(500);  // Adjust to control time taken to fade
+          chThdSleepMicroseconds(500);  // Adjust delay to control time taken to fade
         }
+
+        //Update status variables
+        current_state = msg & 7;  // Update current state variable
+        current_group = !current_group; // Other group is now active
       }
   }
 }
@@ -119,20 +119,23 @@ static THD_FUNCTION(LEDC, arg) {
 	  // To limit current usage, only 4 channels can be lit at a time
 	  uint8_t num_remaining = 4 - ((current_state & 1) + ((current_state & 2) / 2) + ((current_state & 4) / 4));
 	  
-	  next_state = next_state || (1 << (rand() % 4));  // Guarantee at least one set bit
+	  next_state = 1 << (rand() % 4);  // Guarantee at least one set bit
 	  for (int i = 1; i < num_remaining; i++){
 		next_state = next_state || (1 << (rand() % 4)); /* If shifted by 3, next state doesn't change
-		                                                * as only least 3 bits are used */
+		                                                 * as only least 3 bits are used */
 	  }
 	  next_state = next_state & 7;  //Ensure only 3 bits can be set 
-	  //chMBPost(mbox, next_state & brightness bits, TIME_INFINITE);
-          chMBPost(mbox, next_state || 56, TIME_INFINITE);  // Max brightness
+
 	  /* Message format (LSB is #0):
-	   * 0 to 2 : led channels to light next (LSB -> MSB : R,G,B)
-	              note that current number of lit channels + next no. of lit channels <= 4
+	   * 0 to 2 : led channels to light next (00000BGR)
+	   *          note that current number of lit channels + next no. of lit channels <= 4
            * 3 to 5 : brightness level (0 to 7 in decimal)
+           *
+           * So overall message: (00xxxBGR)
 	   */
-	  chThdSleepMilliseconds(5000);  // Change colours every 5 seconds
+	  //chMBPost(mbox, next_state & (brightness bits), TIME_INFINITE);
+          chMBPost(mbox, next_state || 56, TIME_INFINITE);  // Max brightness
+	  chThdSleepSeconds(5);  // Change colours every 5 seconds
     }
 }
 
@@ -166,7 +169,9 @@ int main(void) {
 
   // Normal main() thread activity
   while (true) {
-    chThdSleepMilliseconds(5000);
+    chThdSleepMilliseconds(5000);  // Do nothing
   }
   return 0;
 }
+
+//!!Button interrupt needs to send current state to updateleds, to refresh display
