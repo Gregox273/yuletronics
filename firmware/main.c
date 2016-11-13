@@ -2,6 +2,12 @@
   Greg Brooks 2016
 */
 
+/*Todo when it works:
+*Finish push button code so that brightness can be changed, even during fading loop
+*Replace current_group bool with a spare bit in the msg/current_state byte
+*Uncomment push button code
+*/
+
 #include "ch.h"
 #include "hal.h"
 #include <stdlib.h>
@@ -19,19 +25,21 @@
 
 #define PWM_PERIOD 1024  // ~0.01s in systicks
 
-
+// NEED UTEX PROTECTION
 // Shared variable to define current LED channel state (3 bits)
-static uint8_t current_state = 1;  // Current led channel state (channels 1 to 3) 00000BGR
+static uint8_t current_state = 1;  // Current led channel state (channels 1 to 3) 00xxxBGR
 
 // Shared variable defines which channel is active
 static bool current_group = false; /* led group that is currently active 
                                     * false for led group 1, true for group 2 */
+									
 
 static void updateleds(uint8_t bits, bool group, uint16_t dcycle){
   //Function to abstract pwm channels
-  // bits contain rgb combination 00000BGR
+  // bits contain rgb combination 00xxxBGR
   // group  = false for group 1, true for group 2
   // dcycle is duty cycle in systicks
+  chSysLockFromISR(); // So that dcycle doesn't change halfway through
   if (group){
     if (bits & COL_RED) pwmEnableChannel(&PWMD2, 1, dcycle);
     if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 2, dcycle);
@@ -43,7 +51,30 @@ static void updateleds(uint8_t bits, bool group, uint16_t dcycle){
     if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 4, dcycle);
     if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 1, dcycle);
   }
+  chSysUnlockFromISR();
 }
+
+/* Button interrupt callback */
+/*void button_press(EXTDriver *extp, expchannel_t channel) {
+
+	(void)extp;
+	(void)channel;
+    extChannelDisable(&extp, &channel);
+	//Debounce
+	chThdSleepMilliseconds(100);  // Adjust to taste
+	if (palReadLine(BUTTON)){
+		chSysLockFromISR();
+		bright = current_state & 56 >> 3;
+		bright = (bright + 1)%5  // 0 to 4
+		current_state = (current_state & 199) + (bright << 3);
+		uint16_t dcycle = (PWM_PERIOD * bright)/4;
+		
+		updateleds(current_state, current_group, dcycle);  // Refresh LEDs
+		chSysUnlockFromISR();
+		//!!Button interrupt needs to send current state to updateleds, to refresh display
+	}
+
+}*/
 
 
 /*
@@ -78,6 +109,36 @@ static PWMConfig pwm3cfg = {
 };
 
 
+/* Interrupt Configuration */
+//static const EXTConfig extcfg = {
+//  {
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px0 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px1 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px2 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px3 */
+//    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART | EXT_MODE_GPIOA, button_press}, /* PA4 PUSH BUTTON*/
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px5 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px6 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px7 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px8 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px9 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px10 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px11 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px12 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px13 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px14 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Px15 */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* PVD Wakeup */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* RTC Alarm Event */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* USB OTG FS Wakeup */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* Ethernet Wakeup */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* USB OTG HS Wakeup */
+//    {EXT_CH_MODE_DISABLED, NULL}, /* RTC Timestamp */
+//    {EXT_CH_MODE_DISABLED, NULL}  /* RTC Wakeup */
+//  } 
+//};
+//*/
+
 /*
  * LED fader thread, times are in milliseconds.
  */
@@ -89,17 +150,20 @@ static THD_FUNCTION(LEDS, arg) {
   while (true) {
       result = chMBFetch(mbox, &msg, TIME_INFINITE);  // Fetch LED request
       if(result == MSG_OK) {
-        uint8_t brightness = (msg & 56) / 8;       // Separate brightness value into a 0-8 (decimal) value
-        brightness = PWM_PERIOD * brightness / 8;  // Now express as a number of systicks (max 1 wave period) 
+        uint8_t brightness = (msg & 56) >> 3;       // Separate brightness value into a 0-5 (decimal) value
+        brightness = (PWM_PERIOD * brightness) / 5;  // Now express as a number of systicks (max 1 wave period) 
 
         
         for(uint16_t dcycle = 0; dcycle < brightness; dcycle++){
           //fade down current state
           updateleds(current_state, current_group, brightness - dcycle);          
 
-          //fade up next state
+          // Fade up next state
           updateleds(msg & 7, !current_group, dcycle);
-
+          // Update brightness
+		  brightness = (msg & 56) >> 3;       // Separate brightness value into a 0-5 (decimal) value
+          brightness = (PWM_PERIOD * brightness) / 5;
+		  
           chThdSleepMicroseconds(500);  // Adjust delay to control time taken to fade
         }
 
@@ -125,15 +189,18 @@ static THD_FUNCTION(LEDC, arg) {
 		                                                 * as only least 3 bits are used */
 	  }
 	  next_state = next_state & 7;  //Ensure only 3 bits can be set 
+	  
+	  //Now add brightness bits
+	  //next_state += current_state & 56;  // UNCOMMENT WHEN READY TO TEST VARIABLE BRIGHTNESS
 
 	  /* Message format (LSB is #0):
 	   * 0 to 2 : led channels to light next (00000BGR)
 	   *          note that current number of lit channels + next no. of lit channels <= 4
-           * 3 to 5 : brightness level (0 to 7 in decimal)
+           * 3 to 5 : brightness level (0 to 8 in decimal)
            *
            * So overall message: (00xxxBGR)
 	   */
-	  //chMBPost(mbox, next_state & (brightness bits), TIME_INFINITE);
+	  //chMBPost(mbox, next_state & (brightness bits), TIME_INFINITE);   // UNCOMMENT WHEN READY TO TEST VARIABLE BRIGHTNESS
           chMBPost(mbox, next_state || 56, TIME_INFINITE);  // Max brightness
 	  chThdSleepSeconds(5);  // Change colours every 5 seconds
     }
@@ -173,5 +240,3 @@ int main(void) {
   }
   return 0;
 }
-
-//!!Button interrupt needs to send current state to updateleds, to refresh display
