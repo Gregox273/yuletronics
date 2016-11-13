@@ -150,6 +150,7 @@ static THD_FUNCTION(LEDS, arg) {
   while (true) {
       result = chMBFetch(mbox, &msg, TIME_INFINITE);  // Fetch LED request
       if(result == MSG_OK) {
+		// Make this a mutex protected global so brightness callback can edit it during for loop operation? Need to update it within for loop then
         uint8_t brightness = (msg & 56) >> 3;       // Separate brightness value into a 0-5 (decimal) value
         brightness = (PWM_PERIOD * brightness) / 5;  // Now express as a number of systicks (max 1 wave period) 
 
@@ -160,15 +161,12 @@ static THD_FUNCTION(LEDS, arg) {
 
           // Fade up next state
           updateleds(msg & 7, !current_group, dcycle);
-          // Update brightness
-		  brightness = (msg & 56) >> 3;       // Separate brightness value into a 0-5 (decimal) value
-          brightness = (PWM_PERIOD * brightness) / 5;
 		  
           chThdSleepMicroseconds(500);  // Adjust delay to control time taken to fade
         }
 
         //Update status variables
-        current_state = msg & 7;  // Update current state variable
+        current_state = msg & 63;  // Update current state variable
         current_group = !current_group; // Other group is now active
       }
   }
