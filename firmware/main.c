@@ -4,8 +4,6 @@
 
 /*Todo when it works:
 *Finish push button code so that brightness can be changed, even during fading loop
-*Replace current_group bool with a spare bit in the msg/current_state byte
-*Uncomment push button code
 */
 
 #include "ch.h"
@@ -25,34 +23,19 @@
 
 #define PWM_PERIOD 1024  // ~0.01s in systicks
 
-// NEED UTEX PROTECTION
-// Shared variable to define current LED channel state (3 bits)
-static uint8_t current_state = 1;  // Current led channel state (channels 1 to 3) 00xxxBGR
+// Shared variable to define LED state, protected by mutex
+static mutex_t state_mtx;
+static uint8_t current_state = 0b00100001;  // Current led channel state (channels 1 to 3) 0xxxxBGR
+/* Byte format (LSB is #0):
+	   * 0 to 2 : led channels to light next (00000BGR)
+	   *          note that current number of lit channels + next no. of lit channels <= 4
+           * 3 to 5 : brightness level (0 to 5 in decimal)
+           * 6 : active LED group (0 for group 1, 1 for group 2)
+           * So overall byte: (0xxxxBGR)
+*/									
 
-// Shared variable defines which channel is active
-static bool current_group = false; /* led group that is currently active 
-                                    * false for led group 1, true for group 2 */
-									
-
-static void updateleds(uint8_t bits, bool group, uint16_t dcycle){
-  //Function to abstract pwm channels
-  // bits contain rgb combination 00xxxBGR
-  // group  = false for group 1, true for group 2
-  // dcycle is duty cycle in systicks
-  chSysLockFromISR(); // So that dcycle doesn't change halfway through
-  if (group){
-    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 1, dcycle);
-    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 2, dcycle);
-    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 2, dcycle);
-  }
-
-  else {
-    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 3, dcycle);
-    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 4, dcycle);
-    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 1, dcycle);
-  }
-  chSysUnlockFromISR();
-}
+static void updateleds(uint8_t bits, uint16_t dcycle);
+static uint16_t brightToDcycle(uint8_t brightness);
 
 /* Button interrupt callback */
 /*void button_press(EXTDriver *extp, expchannel_t channel) {
@@ -64,14 +47,12 @@ static void updateleds(uint8_t bits, bool group, uint16_t dcycle){
 	chThdSleepMilliseconds(100);  // Adjust to taste
 	if (palReadLine(BUTTON)){
 		chSysLockFromISR();
-		bright = current_state & 56 >> 3;
+		bright = current_state & 0b00111000 >> 3;
 		bright = (bright + 1)%5  // 0 to 4
-		current_state = (current_state & 199) + (bright << 3);
-		uint16_t dcycle = (PWM_PERIOD * bright)/4;
-		
-		updateleds(current_state, current_group, dcycle);  // Refresh LEDs
+		current_state = (current_state & 0b11000111) + (bright << 3);
+		uint16_t dcycle = brightToDcycle(bright);
+		updateleds(current_state, dcycle);  // Refresh LEDs
 		chSysUnlockFromISR();
-		//!!Button interrupt needs to send current state to updateleds, to refresh display
 	}
 
 }*/
@@ -150,24 +131,29 @@ static THD_FUNCTION(LEDS, arg) {
   while (true) {
       result = chMBFetch(mbox, &msg, TIME_INFINITE);  // Fetch LED request
       if(result == MSG_OK) {
-		// Make this a mutex protected global so brightness callback can edit it during for loop operation? Need to update it within for loop then
-        uint8_t brightness = (msg & 56) >> 3;       // Separate brightness value into a 0-5 (decimal) value
-        brightness = (PWM_PERIOD * brightness) / 5;  // Now express as a number of systicks (max 1 wave period) 
+        msg = msg & 0b00000111; // Ensure only colour bits are set
+        for(uint16_t dcycle = 0; dcycle < (PWM_PERIOD / 4); dcycle++){
 
-        
-        for(uint16_t dcycle = 0; dcycle < brightness; dcycle++){
+          uint8_t brightness = (current_state & 0b00111000) >> 3;       // Separate brightness value into a 0-4 (decimal) value
+          uint16_t max_dut = brightToDcycle(brightness);             // Greatest duty cycle at this brightness setting
           //fade down current state
-          updateleds(current_state, current_group, brightness - dcycle);          
+          updateleds(current_state, max_dut - (dcycle*brightness));          
 
           // Fade up next state
-          updateleds(msg & 7, !current_group, dcycle);
+          uint8_t next_state = msg + (current_state & 0b11111000);
+          next_state ^= 1 << 6; // Other group is now active
+          updateleds(next_state, dcycle*brightness);
 		  
-          chThdSleepMicroseconds(500);  // Adjust delay to control time taken to fade
+          chThdSleepMilliseconds(2);  // Adjust delay to control time taken to fade
         }
 
         //Update status variables
-        current_state = msg & 63;  // Update current state variable
-        current_group = !current_group; // Other group is now active
+        chSysLock();
+        chMtxLock(&state_mtx);
+        current_state = (current_state & 0b11111000) + msg;  // Update current state variable
+        current_state ^= 1 << 6; // Other group is now active
+        chMtxUnlock(&state_mtx);
+        chSysUnlock();
       }
   }
 }
@@ -186,20 +172,9 @@ static THD_FUNCTION(LEDC, arg) {
 		next_state = next_state || (1 << (rand() % 4)); /* If shifted by 3, next state doesn't change
 		                                                 * as only least 3 bits are used */
 	  }
-	  next_state = next_state & 7;  //Ensure only 3 bits can be set 
-	  
-	  //Now add brightness bits
-	  //next_state += current_state & 56;  // UNCOMMENT WHEN READY TO TEST VARIABLE BRIGHTNESS
 
-	  /* Message format (LSB is #0):
-	   * 0 to 2 : led channels to light next (00000BGR)
-	   *          note that current number of lit channels + next no. of lit channels <= 4
-           * 3 to 5 : brightness level (0 to 8 in decimal)
-           *
-           * So overall message: (00xxxBGR)
-	   */
-	  //chMBPost(mbox, next_state & (brightness bits), TIME_INFINITE);   // UNCOMMENT WHEN READY TO TEST VARIABLE BRIGHTNESS
-          chMBPost(mbox, next_state || 56, TIME_INFINITE);  // Max brightness
+	  next_state = next_state & 0b00000111;  //Ensure only 3 bits can be set 
+          chMBPost(mbox, next_state, TIME_INFINITE);
 	  chThdSleepSeconds(5);  // Change colours every 5 seconds
     }
 }
@@ -219,6 +194,8 @@ int main(void) {
   halInit();
   chSysInit();
 
+  chMtxObjectInit(&state_mtx);
+
   //Create thread mailbox
   mailbox_t mbox;
   msg_t mbox_buffer[3];
@@ -237,4 +214,29 @@ int main(void) {
     chThdSleepMilliseconds(5000);  // Do nothing
   }
   return 0;
+}
+
+
+
+static void updateleds(uint8_t bits, uint16_t dcycle){
+  //Function to abstract pwm channels
+  // bits contain rgb combination 0xxxxBGR
+  // dcycle is duty cycle in systicks
+  if (bits & 0b01000000){
+    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 1, dcycle);
+    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 2, dcycle);
+    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 2, dcycle);
+  }
+
+  else {
+    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 3, dcycle);
+    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 4, dcycle);
+    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 1, dcycle);
+  }
+}
+
+static uint16_t brightToDcycle(uint8_t brightness){
+  // Converts 3 bit brightness value to duty cycle (systicks)
+  if (brightness > 4) brightness = 4;  // Catch errors
+  return((PWM_PERIOD * brightness) / 4);  // Express as a number of systicks (max 1 wave period)
 }
