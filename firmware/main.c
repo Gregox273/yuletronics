@@ -42,7 +42,7 @@ static uint16_t brightToDcycle(uint8_t brightness);
 
 	(void)extp;
 	(void)channel;
-    extChannelDisable(&extp, &channel);
+        extChannelDisable(&extp, &channel);
 	//Debounce
 	chThdSleepMilliseconds(100);  // Adjust to taste
 	if (palReadLine(BUTTON)){
@@ -54,6 +54,7 @@ static uint16_t brightToDcycle(uint8_t brightness);
 		updateleds(current_state, dcycle);  // Refresh LEDs
 		chSysUnlockFromISR();
 	}
+	extChannelEnable(&extp, &channel);
 
 }*/
 
