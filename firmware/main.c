@@ -170,7 +170,7 @@ static THD_FUNCTION(LEDC, arg) {
 	  
 	  next_state = 1 << (rand() % 4);  // Guarantee at least one set bit
 	  for (int i = 1; i < num_remaining; i++){
-		next_state = next_state || (1 << (rand() % 4)); /* If shifted by 3, next state doesn't change
+		next_state = next_state | (1 << (rand() % 4)); /* If shifted by 3, next state doesn't change
 		                                                 * as only least 3 bits are used */
 	  }
 
