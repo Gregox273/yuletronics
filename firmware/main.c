@@ -2,10 +2,6 @@
   Greg Brooks 2016
 */
 
-/*Todo when it works:
-*Finish push button code so that brightness can be changed, even during fading loop
-*/
-
 #include "ch.h"
 #include "hal.h"
 #include <stdlib.h>
@@ -23,6 +19,9 @@
 
 #define PWM_PERIOD 128U  // in systicks
 
+// Button press semaphore
+static binary_semaphore_t button_sem;
+
 // Shared variable to define LED state, protected by mutex
 static mutex_t state_mtx;
 static uint8_t current_state = 0b00100001;  // Current led channel state (channels 1 to 3) 0xxxxBGR
@@ -39,25 +38,12 @@ static uint16_t brightToDcycle(uint8_t brightness);
 
 /* Button interrupt callback */
 void button_press(EXTDriver *extp, expchannel_t channel) {
-
 	(void)extp;
 	(void)channel;
-        /*extChannelDisable(extp, channel);
-	//Debounce
-	chThdSleepMilliseconds(100);  // Adjust to taste
-	if (palReadLine(BUTTON)){
-		chSysLockFromISR();
-		uint8_t bright = current_state & 0b00111000 >> 3;
-		bright = (bright + 1)%5;  // 0 to 4
-		current_state = (current_state & 0b11000111) + (bright << 3);
-		uint16_t dcycle = brightToDcycle(bright);
-		updateleds(current_state, dcycle);  // Refresh LEDs
-		chSysUnlockFromISR();
-	}
-	extChannelEnable(extp, channel);*/ 
-
-        SET A SEPHAMORE INSTEAD, DO THIS WITHIN LED SERVER THREAD
-
+	
+        chSysLockFromISR();
+        chBSemSignalI(&button_sem);
+        chSysUnlockFromISR();
 }
 
 
@@ -134,16 +120,17 @@ static THD_FUNCTION(LEDS, arg) {
       result = chMBFetch(mbox, &msg, TIME_INFINITE);  // Fetch LED request
       if(result == MSG_OK) {
         msg = msg & 0b00000111; // Ensure only colour bits are set
+        
         for(uint16_t dcycle = 0; dcycle < (PWM_PERIOD / 4) + 1; dcycle++){
-          uint8_t brightness = (current_state & 0b00111000) >> 3;       // Separate brightness value into a 0-4 (decimal) value
-          uint16_t max_dut = brightToDcycle(brightness);             // Greatest duty cycle at this brightness setting
+          uint8_t brightness = (current_state & 0b00111000) >> 3;
+          uint16_t max_dut = brightToDcycle(brightness);  // Greatest duty cycle at this brightness setting
           //fade down current state
-          updateleds(current_state, max_dut - (dcycle*brightness*brightness*0.25));  // Brightness appears non linear to the eye        
+          updateleds(current_state, max_dut - (dcycle*brightness));        
 
           // Fade up next state
           uint8_t next_state = msg + (current_state & 0b11111000);
           next_state = next_state ^(1 << 6); // Other group is now active
-          updateleds(next_state, dcycle*brightness*brightness*brightness*0.25*0.25);
+          updateleds(next_state, dcycle*brightness);
 		  
           chThdSleepMilliseconds(40);  // Adjust delay to control time taken to fade
         }      
@@ -177,7 +164,33 @@ static THD_FUNCTION(LEDC, arg) {
 	  next_state = next_state & 0b00000111;  //Ensure only 3 bits can be set 
           chMBPost(mbox, next_state, TIME_INFINITE);
 	  chThdSleepSeconds(5);  // Change colours every 5 seconds
-          }
+        }
+}
+
+
+/*
+ * Button interrupt thread
+ */
+static THD_WORKING_AREA(waBUT, 128);
+static THD_FUNCTION(BUT, arg) {
+  (void)arg;
+  chBSemObjectInit(&button_sem, true);
+
+  while(true){
+    chBSemWait(&button_sem);
+    chSysLock();
+    uint8_t brightness = (current_state & 0b00111000) >> 3;
+    brightness++;
+    brightness = brightness % 5;  // 0 to 4
+    current_state = (current_state & 0b11000111) | ((brightness & 0b00000111) << 3);
+    chSysUnlock();
+    updateleds(current_state, brightToDcycle(brightness));
+   //updateleds(0b00010001, brightToDcycle(1));
+   //chThdSleepMilliseconds(100);  // Change colours every 5 seconds
+   //updateleds(0b00010001, brightToDcycle(0));
+   chThdSleepMilliseconds(500);  // Change colours every 5 seconds
+   chBSemReset(&button_sem, TRUE);
+  }
 }
 
 /*
@@ -210,6 +223,8 @@ int main(void) {
   // Create threads.
   chThdCreateStatic(waLEDS, sizeof(waLEDS), NORMALPRIO, LEDS, (void *)&mbox);
   chThdCreateStatic(waLEDC, sizeof(waLEDC), NORMALPRIO, LEDC, (void *)&mbox);
+  chThdCreateStatic(waBUT, sizeof(waBUT), NORMALPRIO, BUT, NULL);
+
 
   // Normal main() thread activity
   while (true) {
