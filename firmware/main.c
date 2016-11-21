@@ -11,9 +11,9 @@
 #include <stdlib.h>
 
 // Colour macros (for 3 bit message format)
-#define COL_RED 1
-#define COL_GRN 2
-#define COL_BLU 4
+#define COL_RED 1U
+#define COL_GRN 2U
+#define COL_BLU 4U
 
 #define COL_YLW (COL_RED + COL_GRN)
 #define COL_CYN (COL_GRN + COL_BLU)
@@ -21,7 +21,7 @@
 
 #define COL_WHT (COL_RED + COL_GRN + COL_BLU)
 
-#define PWM_PERIOD 1024  // ~0.01s in systicks
+#define PWM_PERIOD 128U  // in systicks
 
 // Shared variable to define LED state, protected by mutex
 static mutex_t state_mtx;
@@ -64,7 +64,7 @@ static uint16_t brightToDcycle(uint8_t brightness);
  */
 static PWMConfig pwm2cfg = {
   10000,                                 /* 10kHz PWM clock frequency.   */
-  PWM_PERIOD,                            /* PWM period 0.01S (in ticks).    */
+  PWM_PERIOD,                            /* PWM period in ticks    */
   NULL,
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},
@@ -78,7 +78,7 @@ static PWMConfig pwm2cfg = {
 
 static PWMConfig pwm3cfg = {
   10000,                                 /* 10kHz PWM clock frequency.   */
-  PWM_PERIOD,                            /* PWM period 0.01S (in ticks).    */
+  PWM_PERIOD,                            /* PWM period in ticks    */
   NULL,
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},
@@ -133,29 +133,28 @@ static THD_FUNCTION(LEDS, arg) {
       result = chMBFetch(mbox, &msg, TIME_INFINITE);  // Fetch LED request
       if(result == MSG_OK) {
         msg = msg & 0b00000111; // Ensure only colour bits are set
-        for(uint16_t dcycle = 0; dcycle < (PWM_PERIOD / 4); dcycle++){
-
+        for(uint16_t dcycle = 0; dcycle < (PWM_PERIOD / 4) + 1; dcycle++){
           uint8_t brightness = (current_state & 0b00111000) >> 3;       // Separate brightness value into a 0-4 (decimal) value
           uint16_t max_dut = brightToDcycle(brightness);             // Greatest duty cycle at this brightness setting
           //fade down current state
-          updateleds(current_state, max_dut - (dcycle*brightness));          
+          updateleds(current_state, max_dut - (dcycle*brightness*brightness*0.25));  // Brightness appears non linear to the eye        
 
           // Fade up next state
           uint8_t next_state = msg + (current_state & 0b11111000);
-          next_state ^= 1 << 6; // Other group is now active
-          updateleds(next_state, dcycle*brightness);
+          next_state = next_state ^(1 << 6); // Other group is now active
+          updateleds(next_state, dcycle*brightness*brightness*brightness*0.25*0.25);
 		  
-          chThdSleepMilliseconds(2);  // Adjust delay to control time taken to fade
-        }
-
+          chThdSleepMilliseconds(40);  // Adjust delay to control time taken to fade
+        }      
         //Update status variables
         chSysLock();
-        chMtxLock(&state_mtx);
+        //chMtxLock(&state_mtx);
         current_state = (current_state & 0b11111000) + msg;  // Update current state variable
-        current_state ^= 1 << 6; // Other group is now active
-        chMtxUnlock(&state_mtx);
+        current_state = current_state ^ (1 << 6); // Other group is now active
+        //chMtxUnlock(&state_mtx);
         chSysUnlock();
       }
+
   }
 }
 
@@ -177,7 +176,7 @@ static THD_FUNCTION(LEDC, arg) {
 	  next_state = next_state & 0b00000111;  //Ensure only 3 bits can be set 
           chMBPost(mbox, next_state, TIME_INFINITE);
 	  chThdSleepSeconds(5);  // Change colours every 5 seconds
-    }
+          }
 }
 
 /*
@@ -223,16 +222,16 @@ static void updateleds(uint8_t bits, uint16_t dcycle){
   //Function to abstract pwm channels
   // bits contain rgb combination 0xxxxBGR
   // dcycle is duty cycle in systicks
-  if (bits & 0b01000000){
-    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 1, dcycle);
-    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 2, dcycle);
-    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 2, dcycle);
+  if (bits & (1 << 6)){
+    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 0, dcycle);
+    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 1, dcycle);
+    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 1, dcycle);
   }
 
   else {
-    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 3, dcycle);
-    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 4, dcycle);
-    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 1, dcycle);
+    if (bits & COL_RED) pwmEnableChannel(&PWMD2, 2, dcycle);
+    if (bits & COL_GRN) pwmEnableChannel(&PWMD2, 3, dcycle);
+    if (bits & COL_BLU) pwmEnableChannel(&PWMD3, 0, dcycle);
   }
 }
 
