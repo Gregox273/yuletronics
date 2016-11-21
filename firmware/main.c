@@ -38,25 +38,27 @@ static void updateleds(uint8_t bits, uint16_t dcycle);
 static uint16_t brightToDcycle(uint8_t brightness);
 
 /* Button interrupt callback */
-/*void button_press(EXTDriver *extp, expchannel_t channel) {
+void button_press(EXTDriver *extp, expchannel_t channel) {
 
 	(void)extp;
 	(void)channel;
-        extChannelDisable(&extp, &channel);
+        /*extChannelDisable(extp, channel);
 	//Debounce
 	chThdSleepMilliseconds(100);  // Adjust to taste
 	if (palReadLine(BUTTON)){
 		chSysLockFromISR();
-		bright = current_state & 0b00111000 >> 3;
-		bright = (bright + 1)%5  // 0 to 4
+		uint8_t bright = current_state & 0b00111000 >> 3;
+		bright = (bright + 1)%5;  // 0 to 4
 		current_state = (current_state & 0b11000111) + (bright << 3);
 		uint16_t dcycle = brightToDcycle(bright);
 		updateleds(current_state, dcycle);  // Refresh LEDs
 		chSysUnlockFromISR();
 	}
-	extChannelEnable(&extp, &channel);
+	extChannelEnable(extp, channel);*/ 
 
-}*/
+        SET A SEPHAMORE INSTEAD, DO THIS WITHIN LED SERVER THREAD
+
+}
 
 
 /*
@@ -92,34 +94,33 @@ static PWMConfig pwm3cfg = {
 
 
 /* Interrupt Configuration */
-//static const EXTConfig extcfg = {
-//  {
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px0 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px1 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px2 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px3 */
-//    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART | EXT_MODE_GPIOA, button_press}, /* PA4 PUSH BUTTON*/
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px5 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px6 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px7 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px8 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px9 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px10 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px11 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px12 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px13 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px14 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Px15 */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* PVD Wakeup */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* RTC Alarm Event */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* USB OTG FS Wakeup */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* Ethernet Wakeup */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* USB OTG HS Wakeup */
-//    {EXT_CH_MODE_DISABLED, NULL}, /* RTC Timestamp */
-//    {EXT_CH_MODE_DISABLED, NULL}  /* RTC Wakeup */
-//  } 
-//};
-//*/
+static const EXTConfig extcfg = {
+  {
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px0 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px1 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px2 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px3 */
+    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART | EXT_MODE_GPIOA, button_press}, /* PA4 PUSH BUTTON*/
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px5 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px6 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px7 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px8 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px9 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px10 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px11 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px12 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px13 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px14 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Px15 */
+    {EXT_CH_MODE_DISABLED, NULL}, /* PVD Wakeup */
+    {EXT_CH_MODE_DISABLED, NULL}, /* RTC Alarm Event */
+    {EXT_CH_MODE_DISABLED, NULL}, /* USB OTG FS Wakeup */
+    {EXT_CH_MODE_DISABLED, NULL}, /* Ethernet Wakeup */
+    {EXT_CH_MODE_DISABLED, NULL}, /* USB OTG HS Wakeup */
+    {EXT_CH_MODE_DISABLED, NULL}, /* RTC Timestamp */
+    {EXT_CH_MODE_DISABLED, NULL}  /* RTC Wakeup */
+  } 
+};
 
 /*
  * LED fader thread, times are in milliseconds.
@@ -167,7 +168,7 @@ static THD_FUNCTION(LEDC, arg) {
 	  // To limit current usage, only 4 channels can be lit at a time
 	  uint8_t num_remaining = 4 - ((current_state & 1) + ((current_state & 2) / 2) + ((current_state & 4) / 4));
 	  
-	  next_state = 1 << (rand() % 4);  // Guarantee at least one set bit
+	  next_state = 1 << (rand() % 3);  // Guarantee at least one set bit
 	  for (int i = 1; i < num_remaining; i++){
 		next_state = next_state | (1 << (rand() % 4)); /* If shifted by 3, next state doesn't change
 		                                                 * as only least 3 bits are used */
@@ -198,12 +199,13 @@ int main(void) {
 
   //Create thread mailbox
   mailbox_t mbox;
-  msg_t mbox_buffer[3];
-  chMBObjectInit(&mbox,mbox_buffer, 3);
+  msg_t mbox_buffer[1];
+  chMBObjectInit(&mbox,mbox_buffer, 1);
   
-  // Initialise PWM drivers
+  // Initialise PWM drivers and interrupt
   pwmStart(&PWMD2, &pwm2cfg);
   pwmStart(&PWMD3, &pwm3cfg);
+  extStart(&EXTD1, &extcfg);
 
   // Create threads.
   chThdCreateStatic(waLEDS, sizeof(waLEDS), NORMALPRIO, LEDS, (void *)&mbox);
